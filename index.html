@@ -1,0 +1,2461 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бугаевский консалтинг</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+
+            --text: #1F1F1F;
+            --text-secondary: #6B6B6B;
+            --text-light: #9A9A9A;
+            --accent: #D4A43C;
+            --cta-bg: #2F2F2F;
+            --cta-hover: #3A3A3A;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(212, 164, 60, 0.5);
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            --card-shadow-open: 0 8px 24px rgba(0,0,0,0.06);
+            --divider: #ECEDF0;
+            --subtitle-color: #3A3D42;
+            --title-soft: #2C2C2C;
+            --grid-text: #3A3D42;
+            --circle-size: 40px;
+            --line-width: 1.5px;
+            --icon-color: #9A9A9A;
+            --left-offset: 64px;
+            --header-offset: 72px;
+            --ribbon-offset: 77px;
+            --content-width: 820px;
+            --ribbon-width: 779px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px 80px 0;
+        }
+
+        .hero__header {
+            margin-left: 64px; 
+            margin-bottom: 24px; 
+            max-width: var(--content-width); 
+            text-align: center;
+        }
+
+        .hero__title {
+            font-size: 45px;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: #1F1F1F;
+        }
+
+        .hero__subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-top: 16px;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .hero__ribbon {
+            margin-left: var(--ribbon-offset);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: var(--ribbon-width);
+        }
+
+        .ribbon-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .ribbon-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .ribbon-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #D4A43C;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hero__main {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .accordion-outer {
+            flex: 0 0 auto;
+            position: relative;
+            width: calc(var(--content-width) + var(--left-offset));
+        }
+
+        .axis {
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        .axis__node {
+            position: absolute;
+            left: 0;
+            width: var(--circle-size);
+            height: var(--circle-size);
+            border-radius: 50%;
+            border: 1.5px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--accent);
+            transition: top 0.35s ease-out, opacity 0.2s; 
+            pointer-events: auto;
+        }
+
+        .axis__segment {
+            position: absolute;
+            left: 19px;
+            width: var(--line-width);
+            background-color: var(--accent);
+            transition: top 0.35s ease-out, height 0.35s ease-out;
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-left: var(--left-offset);
+            position: relative;
+            z-index: 2;
+            width: var(--content-width);
+        }
+
+        .accordion__card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 20px;
+            cursor: pointer;
+            transition: box-shadow 0.25s ease-out, background-color 0.25s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .accordion__card--expanded {
+            box-shadow: var(--card-shadow-open);
+            background: #FFFFFF;
+            align-items: flex-start;
+        }
+
+        .accordion__card:hover {
+            box-shadow: var(--card-shadow);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .accordion__body {
+            flex: 1;
+            min-width: 0;
+            padding-right: 12px;
+        }
+
+        .accordion__title {
+            font-size: 26px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--title-soft);
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+        }
+
+        .accordion__subtitle {
+            font-size: 15.4px;
+            font-weight: 400;
+            color: #909090;
+            line-height: 1.5;
+           font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+           letter-spacing: 0.015em;
+        }
+
+        /* Сетка состава */
+        .accordion__grid {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 20px;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--divider);
+            font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+            font-size: 16.5px;
+            font-weight: 400;
+            color: var(--grid-text);
+            line-height: 1.55;
+            letter-spacing: 0.015em;
+        }
+        .accordion__grid .grid-item {
+            transition: font-weight 0.2s;
+        }
+        .accordion__grid .grid-item:hover {
+            font-weight: 400;
+        }
+
+        .accordion__card--expanded .accordion__grid {
+            display: grid;
+        }
+
+        .grid-item {
+            padding: 10px 0 10px 18px;
+            position: relative;
+        }
+
+        .grid-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 18px;
+            width: 0px;
+            height: 0px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        /* Линии только в слое 01 под каждым пунктом, кроме последнего */
+        #grid-1 .grid-item:not(:last-child) {
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .is-hidden {
+            display: none;
+        }
+        .is-hidden.is-visible {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .accordion__more {
+            display: none;
+            margin-top: 14px;
+            font-size: 13.5px;
+            color: var(--accent);
+            font-weight: 700;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+            letter-spacing: 0.04em; 
+           font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .accordion__card--expanded .accordion__more {
+            display: inline-flex;
+        }
+
+        .accordion__more:hover {
+            opacity: 0.7;
+        }
+
+        .accordion__more-arrow {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .accordion__icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1.5px solid var(--accent);
+            transition: background-color 0.25s ease-out, top 0.35s ease-out;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent);
+            line-height: 1;
+            user-select: none;
+        }
+
+        .accordion__card--expanded .accordion__icon {
+            background-color: rgba(212, 164, 60, 0.1);
+            top: 28px;
+            transform: translateY(0);
+        }
+
+        .hero__side {
+    position: fixed;
+    top: 280px;
+    right: calc((100vw - 1200px) / 2 + 40px);
+    transform: none;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    z-index: 10;
+}
+
+        .hero__litera {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            overflow: hidden;
+            height: 280px;
+        }
+
+        .hero__litera-text {
+            font-family: 'Montserrat', serif;
+            font-size: 320px;
+            font-weight: 600;
+            color: var(--accent);
+            opacity: 0.2;
+            line-height: 0.7;
+            user-select: none;
+            margin-top: -40px;
+        }
+
+.hero__litera-img {
+    width: 215px;
+    height: 280px;
+    object-fit: contain;
+    opacity: 0.85;
+    margin-top: -40px;
+}
+
+        .hero__side-slogan {
+            font-size: 15px;
+            font-weight: 650;
+            color: var(--grid-text);
+            letter-spacing: 0.005em;
+            font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
+            margin-top: 0;
+            word-break: keep-all; 
+            overflow-wrap: normal;
+        }
+
+.at-symbol::after {
+    content: "@";
+    display: inline;
+}
+.at-symbol {
+    font-size: 0;
+}
+.at-symbol::after {
+    font-size: 15px;
+}
+.dot-symbol::after {
+    content: ".";
+    display: inline;
+}
+.dot-symbol {
+    font-size: 0;
+}
+.dot-symbol::after {
+    font-size: 15px;
+}
+
+      .hero__side-slogan .brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    word-spacing: -4px;
+}
+
+        .hero__side-divider {
+            width: 96px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 20px 0;
+            opacity: 0.85;
+        }
+
+        .hero__side-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--cta-bg);
+            color: #FFFFFF;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 0 20px;
+            height: 50px;
+            border-radius: 10px;
+            width: fit-content;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+            transition: background-color 0.2s ease-out, transform 0.15s ease-out;
+            border: 2px solid var(--accent);
+        }
+
+        .hero__side-cta:hover {
+            background-color: var(--cta-hover);
+            transform: translateY(-1px);
+        }
+.hero__mobile-cta {
+    display: none;
+}
+        .hero__side-cta-arrow {
+            font-size: 16px;
+            font-weight: 700;
+       }
+
+.hero__audience-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    margin-top: 16px;
+    flex-direction: row;
+    text-align: left;
+}
+.hero__audience-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.hero__audience-text {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+    text-align: left;
+    margin: 0;
+}
+
+.ribbon-item:hover .ribbon-icon svg {
+    opacity: 0.7;
+}
+.accordion__icon:hover {
+    opacity: 0.7;
+}
+.hero__side-slogan .brand-name:hover {
+    opacity: 0.7;
+}
+.hero__side-slogan:hover { 
+    opacity: 0.7; 
+}
+.hero__audience-icon:hover {
+    opacity: 0.7;
+}
+.hero__audience-wrap:hover svg {
+    opacity: 0.7;
+}
+.axis__node:hover {
+    opacity: 0.7;
+}
+.hero__audience-wrap:hover .hero__audience-icon {
+    opacity: 0.7;
+}
+.popup__qnum:hover {
+    opacity: 0.7;
+}
+
+.hero__title:hover {
+    opacity: 0.7;
+}
+.hero__subtitle:hover {
+    opacity: 0.7;
+}
+.hero__side div:hover {
+    opacity: 0.7;
+}
+.grid-item:hover { 
+text-shadow: 0 0 0.5px #1F1F1F; 
+}
+
+/////Перелевающийся эффект для литеры
+.hero__litera img {
+    transition: opacity 0.2s;
+}
+.hero__litera:hover img {
+    opacity: 0.7;
+}
+
+        @media (max-width: 1100px) {
+            .hero {
+                padding: 60px 24px 50px 0;
+            }
+               .hero__header {
+                margin-left: 54px;
+                max-width: 100%;
+            }
+            .hero__title {
+                font-size: 34px;
+            }
+            .hero__ribbon {
+                margin-left: 54px;
+                width: auto;
+                flex-wrap: wrap;
+                gap: 14px;
+                justify-content: flex-start;
+            }
+            .hero__main {
+                flex-direction: column;
+                gap: 32px;
+            }
+            .accordion-outer {
+                width: 100%;
+            }
+            .accordion {
+                width: 100%;
+            }
+             .hero__side {
+                display: none !important;
+            }
+    .hero__mobile-cta {
+        display: block !important;
+        text-align: center;
+        margin: 32px auto 0;
+        padding: 0 20px;
+        font-size: 12px; 
+        color: #9A9A9A; 
+        line-height: 1.4;
+    }
+    .hero__mobile-brand {
+        font-size: 18px;
+        font-weight: 700;
+        color: #D4A43C;
+    }
+    .hero__mobile-slogan {
+        font-size: 14px;
+        color: #6B6B6B;
+    }
+    .hero__mobile-contacts {
+        font-size: 14px;
+        color: #9A9A9A;
+        margin-top: 12px;
+    }
+    .hero__mobile-cta .hero__side-cta {
+        margin-top: 16px;
+    }
+    .hero__mobile-cta .hero__audience-wrap {
+        justify-content: center;
+        margin-top: 16px;
+    }
+
+    .hero__mobile-cta .hero__audience-wrap svg {
+        width: 30px;
+        height: 30px;
+    }
+    .articles__header {
+        margin: 0 auto 30px !important;
+        text-align: center !important;
+    }
+
+}
+
+
+
+ 
+@media (max-width: 1080px) {
+    body {
+        overflow-x: hidden;
+
+       .cases__header {
+        padding-left: 50px;
+        text-align: center;
+    }
+     .cases {
+        padding-left: 0 !important;
+    }
+    .cases__content {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+    .cases__main {
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+        width: calc(100% - 10px) !important;
+    }
+    .hero {
+        margin: 0 !important;
+        padding: 20px 10px !important;
+        max-width: 100% !important;
+    }
+    .hero__header {
+        margin-left: 20px;
+        margin-right: 20px;
+        max-width: 100%;
+    }
+    .hero__title {
+        font-size: 24px;
+    }
+    .hero__subtitle {
+        font-size: 16px;
+    }
+    .hero__side {
+        display: none !important;
+    }
+    .hero__main {
+        flex-direction: column;
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+    .hero__content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+    }
+    .hero__ribbon {
+        display: none;
+    }
+    .accordion-outer {
+        width: 100% !important;
+        overflow: hidden;
+    }
+    .accordion {
+        width: calc(100% - 65px);
+        margin-left: 50px;
+        margin-right: 5px;
+    }
+    .axis {
+        left: 2px;
+    }
+    .accordion__card {
+        padding: 16px;
+    }
+    .accordion__icon {
+        right: 12px;
+    }
+    .accordion__title {
+        font-size: 20px;
+    }
+    .accordion__subtitle {
+        font-size: 14px;
+    }
+    .accordion__grid {
+        grid-template-columns: 1fr;
+        font-size: 15px;
+    }
+   .section-divider {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin-left: auto !important; 
+        margin-right: auto !important;
+    }
+    .hero, .cases, .articles {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 10px;
+    }
+        .articles__main {
+        margin: 0 auto  !important;
+        max-width: calc(100% - 60px)  !important;
+    }
+    .articles__header {
+        margin: 0 auto 30px !important;
+        text-align: center !important;
+    }
+    .cases__main {
+        margin-left: 50px;
+        max-width: calc(100% - 60px);
+    }
+    .accordion__body {
+        padding-right: 48px;
+    }
+    .accordion__icon {
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    .cases {
+        padding: 20px 10px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    .cases__content {
+        width: 100% !important;
+    }
+    .cases__carousel {
+        width: 100% !important;
+    }
+    .cases__track .case-card {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+    .case-card {
+        width: 100% !important;
+    }
+    .cases__carousel,
+    .cases__track {
+        width: 100% !important;
+    }
+    .cases__track .case-card {
+        flex: 0 0 100% !important;
+        min-width: 100% !important;
+    }
+    .cases__header {
+        margin-left: 0px;
+        margin-right: 30px;
+        text-align: center;
+        max-width: calc(100% - 60px);
+    }
+    .cases__nav {
+        justify-content: center;
+        width: 100%;
+    }
+    .cases__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .hero__mobile-cta {
+        display: block !important;
+        text-align: center;
+        margin-top: 32px;
+        padding: 0 20px;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    .hero__mobile-brand {
+        font-size: 18px;
+        font-weight: 700;
+        color: #D4A43C;
+    }
+    .hero__mobile-slogan {
+        font-size: 14px;
+        color: #6B6B6B;
+        margin-top: 4px;
+    }
+    .hero__mobile-contacts {
+        font-size: 14px;
+        color: #9A9A9A;
+        margin-top: 12px;
+        line-height: 1.6;
+    }
+    .hero__mobile-cta .hero__side-cta {
+        margin-top: 16px;
+    }
+    .hero__mobile-cta .hero__audience-wrap {
+        justify-content: center;
+        margin-top: 16px;
+    }
+
+
+
+
+}
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+
+        <div class="hero__header">
+            <h1 class="hero__title">
+                Проектируем денежный поток, предотвращающий кассовые разрывы
+            </h1>
+            <p class="hero__subtitle">
+                Модель управления ликвидностью и обязательствами компании
+            </p>
+        </div>
+
+        <div class="hero__ribbon">
+            <div class="ribbon-item">
+                <div class="ribbon-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+                </div>
+                <span>Анализируем</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-icon">
+                    <svg viewBox="0 0 24 24"><line x1="4" y1="20" x2="4" y2="12"/><line x1="10" y1="20" x2="10" y2="6"/><line x1="16" y1="20" x2="16" y2="16"/></svg>
+                </div>
+                <span>Управляем</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/></svg>
+                </div>
+                <span>Защищаем устойчивость</span>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-icon">
+                    <svg viewBox="0 0 24 24"><polyline points="3 18 7 12 11 14 15 6 21 8"/></svg>
+                </div>
+                <span>Планируем будущее</span>
+            </div>
+        </div>
+
+        <div class="hero__main">
+
+            <div class="accordion-outer" id="accordion-outer">
+
+                <div class="axis" id="axis">
+                    <div class="axis__node" id="node-1">01</div>
+                    <div class="axis__segment" id="seg-1"></div>
+                    <div class="axis__node" id="node-2">02</div>
+                    <div class="axis__segment" id="seg-2"></div>
+                    <div class="axis__node" id="node-3">03</div>
+                    <div class="axis__segment" id="seg-3"></div>
+                    <div class="axis__node" id="node-4">04</div>
+                </div>
+
+                <div class="accordion" id="accordion">
+
+                    <!-- 01 -->
+                    <div class="accordion__card accordion__card--expanded" data-row="1" id="card-1">
+                        <div class="accordion__body">
+                            <div class="accordion__title">Управление ликвидностью</div>
+                            <div class="accordion__subtitle">Контроль остатка, горизонта исчерпания и риска дефицита</div>
+                            <div class="accordion__grid" id="grid-1">
+                               <div class="grid-item">1. Определяем период исчерпания оборотных средств в операционном цикле.</div>
+                               <div class="grid-item">2. Оцениваем реальную рентабельность ассортиментного портфеля в денежном выражении.</div>
+                               <div class="grid-item is-hidden">3. Определяем свободный остаток денежных средств.</div>
+                               <div class="grid-item is-hidden">4. Оцениваем риск возникновения дефицита ликвидности в текущем операционном периоде.</div>
+                               <div class="grid-item is-hidden">5. Определяем уровень расходов для сохранения непрерывности операционной деятельности.</div>
+                               <div class="grid-item is-hidden">6. Привязываем движение денежных потоков к операционному контуру бизнеса.</div>
+                               <div class="grid-item is-hidden">7. Оптимизируем состав и структуру продуктовой линейки.</div>
+                               <div class="grid-item is-hidden">8. Выявляем критические зависимости операционного цикла.</div>
+                               <div class="grid-item is-hidden">9. Определяем минимальный уровень ликвидности для непрерывной работы компании.</div>
+                            </div>
+                            <button class="accordion__more" data-grid="grid-1" data-hidden-count="5">
+                                + ещё 7 параметров
+                                <span class="accordion__more-arrow">▼</span>
+                            </button>
+                        </div>
+                        <div class="accordion__icon">−</div>
+                    </div>
+
+                    <!-- 02 -->
+                    <div class="accordion__card" data-row="2" id="card-2">
+                        <div class="accordion__body">
+                            <div class="accordion__title">Управление решениями</div>
+                            <div class="accordion__subtitle">Оцениваем влияние действий на ликвидность и формируем штаб</div>
+                            <div class="accordion__grid" id="grid-2">
+                                <div class="grid-item">1. Оцениваем влияние управленческих решений на ликвидность.</div>
+                                <div class="grid-item">2. Формируем антикризисный штаб из сотрудников компании.</div>
+                            </div>
+                        </div>
+                        <div class="accordion__icon">+</div>
+                    </div>
+
+                    <!-- 03 -->
+                    <div class="accordion__card" data-row="3" id="card-3">
+                        <div class="accordion__body">
+                            <div class="accordion__title">Управление приоритетами обязательств</div>
+                            <div class="accordion__subtitle">Учитываем ограничения доступа к денежным средствам</div>
+                            <div class="accordion__grid" id="grid-3">
+                                <div class="grid-item">Оцениваем риск внешних ограничений доступа к денежным средствам.</div>
+                            </div>
+                        </div>
+                        <div class="accordion__icon">+</div>
+                    </div>
+
+                    <!-- 04 -->
+                    <div class="accordion__card" data-row="4" id="card-4">
+                        <div class="accordion__body">
+                            <div class="accordion__title">Управление в режиме пост-стабилизации</div>
+                            <div class="accordion__subtitle">Формируем сценарии работы компании в период восстановления</div>
+                            <div class="accordion__grid" id="grid-4">
+                                <div class="grid-item">Определяем параметры сохранения стабильности на границе безубыточности.</div>
+                            </div>
+                        </div>
+                        <div class="accordion__icon">+</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="hero__side">
+                <div class="hero__litera">
+                    <img src="images/bukva.webp?v=2" class="hero__litera-img">
+                </div>
+                <p class="hero__side-slogan"> 
+                         <span class="brand-name">Бугаевский<br>консалтинг</span><br> 
+                                Архитектура<br> 
+                                операционной<br>  
+                                эффективности 
+                 </p>
+
+         <!-- Телефон и почта --> 
+        <div style="font-size:15px;color:#9A9A9A;line-height:1.6;margin-top:12px;text-align:left;"> 
+                         <span id="phone-toggle" style="cursor:pointer;color:#9A9A9A;">+7 (931) 708 <span style="color:#D4A43C;">показать номер</span></span> 
+
+                         <span id="copy-email" style="cursor:pointer;color:#9A9A9A;">dmitry<span class="at-symbol">[at]</span>bugaevsky<span class="dot-symbol">[dot]</span>ru</span>
+                                     <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-left:4px;"> 
+                                                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect> <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                   </path> </svg> </span> </div>
+                <div class="hero__side-divider"></div>
+                <a href="#" class="hero__side-cta">
+                    Получить диагностику
+                    <span class="hero__side-cta-arrow">→</span>
+                </a>
+                  <div style="display:flex;align-items:center;gap:8px;margin-top:16px;">
+                   <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="hero__audience-icon">
+                    <path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/>
+                    
+    </svg>
+    <span style="font-size:12px;color:#9A9A9A;line-height:1.4;">Работаем с собственниками<br>и топ-менеджментом</span>
+</div>
+
+        </div>
+
+
+<div class="hero__mobile-cta">
+    <p class="hero__mobile-brand">Бугаевский консалтинг</p>
+    <p class="hero__mobile-slogan">Архитектура операционной эффективности</p>
+    <p class="hero__mobile-contacts">
+        <span id="phone-toggle-mobile" style="cursor:pointer;">+7 (931) 708 <span style="color:#D4A43C;">показать номер</span></span><br>
+        <span id="copy-email-mobile" style="cursor:pointer;color:#9A9A9A;">dmitry@bugaevsky.ru 
+    <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-left:4px;">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+</span>
+              </p>
+        <a href="#" class="hero__side-cta" id="cta-mobile">Получить диагностику →</a>
+    <div class="hero__audience-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.2"><path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/></svg>
+        <span>Работаем с собственниками<br>и топ-менеджментом</span>
+    </div>
+</div>
+
+
+
+
+    </section>
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- СЕКЦИЯ 2: БЫЛО → СТАЛО                -->
+<!-- ═══════════════════════════════════════ -->
+
+<section class="cases">
+
+        <!-- Заголовок -->
+    <div class="cases__header">
+        <h2 class="cases__title">Модель не требует управленческого учета и <br>работает по единой логике операционного денежного цикла</h2>
+        </div>
+
+    <div class="cases__content">
+        
+        <!-- Левая колонка: кейсы -->
+        <div class="cases__main">
+            
+                        <!-- Карусель -->
+            <div class="cases__carousel" id="cases-carousel">
+                <div class="cases__track" id="cases-track">
+                    <!-- Кейс 1 -->
+                    <div class="case-card">
+                        <div class="case-card__label">Кейс 1</div>
+                        <div class="case-card__body">
+                            <p class="case-card__row"><strong>Было:</strong> Ритейлер, 10 000 SKU, склад 5 000 м², ежемесячные затраты — 8 млн руб. Стандартный учёт показывал прибыль, но регулярно возникал кассовый разрыв. Свободных денег не хватало на обязательные платежи.</p>
+                            <p class="case-card__row"><strong>Что мы сделали:</strong> Оценили реальную рентабельность ассортиментного портфеля в денежном выражении. Выявили позиции, которые создавали иллюзию прибыли, но на деле скрыто потребляли складской ресурс, замораживая ликвидность.</p>
+                            <p class="case-card__row"><strong>Стало:</strong> Обнаружено 200 проблемных SKU, создававших непропорциональную нагрузку на склад. По 150 из них закупки остановлены, остатки распроданы.</p>
+                        </div>
+                        <div class="case-card__result">
+                            <strong>Результат:</strong> кассовый разрыв закрыт. Высвобождено 1.5 млн руб./мес. ликвидности — достаточно для покрытия обязательных платежей без задержек.
+                        </div>
+                    </div>
+
+                    <!-- Кейс 2 -->
+                    <div class="case-card">
+                        <div class="case-card__label">Кейс 2</div>
+                        <div class="case-card__body">
+                            <p class="case-card__row"><strong>Было:</strong> Компания с оборотом 180 млн руб./год. Отсрочка для клиентов — 45 дней. 3 крупных дебитора систематически задерживали оплату. Общая просрочка — 22 млн руб. Регулярно возникал кассовый разрыв.</p>
+                            <p class="case-card__row"><strong>Что мы сделали:</strong> Оценили реальную стоимость просрочки для каждого клиента. Выделили тех, чья задержка платежей напрямую создавала кассовый разрыв. Запустили адресную программу ускорения платежей.</p>
+                            <p class="case-card__row"><strong>Стало:</strong> Возврат 14 млн руб. просроченной задолженности за 3 недели.</p>
+                        </div>
+                        <div class="case-card__result">
+                            <strong>Результат:</strong> кассовый разрыв закрыт. Обязательные платежи выполняются без задержек. Клиенты сохранены.
+                        </div>
+                    </div>
+
+                    <!-- Кейс 3 -->
+                    <div class="case-card">
+                        <div class="case-card__label">Кейс 3</div>
+                        <div class="case-card__body">
+                            <p class="case-card__row"><strong>Было:</strong> Производственная компания. 80% закупок сырья — через одного поставщика. Он диктовал цену и менял условия. Потеря поставщика означала остановку производства.</p>
+                            <p class="case-card__row"><strong>Что мы сделали:</strong> Провели аудит цепочки поставок. Нашли альтернативных поставщиков. Постепенно переключили часть объёма, не разрывая отношений с текущим поставщиком.</p>
+                            <p class="case-card__row"><strong>Стало:</strong> Снижение зависимости от поставщика с 80% до 45%.</p>
+                        </div>
+                        <div class="case-card__result">
+                            <strong>Результат:</strong> снижение заморозки капитала в запасах на 5 млн руб. и устранение риска остановки производства.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Навигация -->
+            <div class="cases__nav">
+                <button class="cases__arrow" id="cases-prev">&lt;</button>
+                <button class="cases__arrow" id="cases-next">&gt;</button>
+            </div>
+
+            <!-- Вывод -->
+            
+
+        </div>
+
+     </div>
+</section>
+<div class="section-divider"></div>
+
+
+<style>
+.section-divider {
+    width: 935px;
+    height: 1px;
+    margin-bottom: 35px;
+    margin-left: 230px;
+    background: rgba(212, 164, 60, 0.4);
+}
+
+/* ── Секция 2: Было → Стало ── */
+.cases {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px 0;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+
+.cases__header {
+    margin-left: 64px;
+    margin-bottom: 32px;
+    max-width: 820px;
+    text-align: center;
+}
+.cases__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1F1F1F;
+    line-height: 1.4;
+}
+.cases__subtitle {
+    font-size: 16px;
+    color: #6B6B6B;
+    margin-top: 8px;
+}
+
+.cases__content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* ── Левая колонка ── */
+.cases__main {
+    flex: 1;
+    max-width: 820px;
+    margin-left: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Карточка кейса ── */
+.case-card {
+    border: 1px solid rgba(212, 164, 60, 0.5);
+    border-radius: 12px;
+    padding: 24px 24px;
+    background: rgba(255,255,255,0.7);
+font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+letter-spacing: 0.02em; line-height: 1.6;
+}
+.case-card__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #D4A43C;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+}
+.case-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.case-card__row {
+    font-size: 15px;
+    color: #3A3D42;
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.55;
+}
+.case-card__row strong {
+    color: #1F1F1F;
+    font-weight: 600;
+}
+.case-card__result {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #ECEDF0;
+    font-size: 15px;
+    color: #3A3D42;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+}
+.case-card__result strong {
+    color: #D4A43C;
+letter-spacing: 0.08em !important;
+font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+}
+.cases__carousel {
+    overflow: hidden;
+    width: 100%;
+}
+.cases__track {
+    display: flex;
+    transition: transform 0.35s ease-out;
+}
+.cases__track .case-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+}
+.cases__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+.cases__arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #D4A43C;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: #D4A43C;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.cases__arrow:hover {
+    background: rgba(212,164,60,0.08);
+}
+.cases__arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+.cases__counter {
+    font-size: 14px;
+    font-weight: 500;
+    color: #D4A43C;
+}
+
+/* ── Вывод ── */
+.cases__conclusion {
+    text-align: center;
+    font-size: 16.5px;
+    font-weight: 500;
+    color: #1F1F1F;
+font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    padding: 20px 0 8px;
+}
+
+/* ── CTA ── */
+.cases__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #2F2F2F;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0 20px;
+    height: 50px;
+    border-radius: 10px;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    border: 2px solid #D4A43C;
+    white-space: nowrap;
+    margin-top: 16px;
+    transition: background-color 0.2s, transform 0.15s;
+  }
+.cases__cta:hover {
+    background-color: #3A3A3A;
+    transform: translateY(-1px);
+}
+
+/* ── Правая колонка ── */
+.cases__side {
+    flex: 0 0 200px;
+    width: 200px;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 5px;
+}
+.profile__photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px solid #D4A43C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #9A9A9A;
+    margin-bottom: 16px;
+    background: #FDFDFE;
+}
+.profile__name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F1F1F;
+}
+.profile__brand {
+    font-size: 11px;
+    color: #9A9A9A;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+.profile__divider {
+    width: 48px;
+    height: 2px;
+    background: #D4A43C;
+    margin: 16px 0;
+    opacity: 0.7;
+}
+.profile__contacts {
+    font-size: 12px;
+    color: #6B6B6B;
+    line-height: 1.6;
+}
+.profile__contacts a {
+    color: #6B6B6B;
+    text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+    .cases__content {
+        flex-direction: column;
+    }
+    .cases__main {
+        margin-left: 54px;
+        max-width: 100%;
+    }
+    .cases__side {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    .profile {
+        flex-direction: row;
+        gap: 16px;
+        text-align: left;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .profile__photo {
+        width: 80px;
+        height: 80px;
+        font-size: 11px;
+        margin-bottom: 0;
+    }
+    .profile__divider {
+        display: none;
+    }
+}
+
+@media (max-width: 1080px) {
+    .cases {
+        padding: 0 20px 50px 0;
+    }
+    .cases__header {
+        margin-left: 50px;
+    }
+    .cases__title {
+        font-size: 18px;
+    }
+    .cases__main {
+        margin-left: 50px;
+    }
+    .case-card {
+        padding: 16px;
+    }
+}
+</style>
+
+    <script>
+        const accordionEl = document.getElementById('accordion');
+        const cards = document.querySelectorAll('.accordion__card');
+        const nodes = [
+            document.getElementById('node-1'),
+            document.getElementById('node-2'),
+            document.getElementById('node-3'),
+            document.getElementById('node-4'),
+        ];
+        const segments = [
+            document.getElementById('seg-1'),
+            document.getElementById('seg-2'),
+            document.getElementById('seg-3'),
+        ];
+        const CIRCLE = 40;
+
+        function updateAxis() {
+            const accordionRect = accordionEl.getBoundingClientRect();
+            const centers = [];
+            cards.forEach(card => {
+                const cardRect = card.getBoundingClientRect();
+                const center = cardRect.top - accordionRect.top + cardRect.height / 2;
+                centers.push(center);
+            });
+            const accordionHeight = accordionEl.offsetHeight;
+            nodes.forEach((node, i) => {
+                const topPercent = (centers[i] / accordionHeight) * 100;
+                node.style.top = topPercent + '%';
+                node.style.marginTop = -(CIRCLE / 2) + 'px';
+            });
+            segments.forEach((seg, i) => {
+                const topCircleBottom = centers[i] + CIRCLE / 2;
+                const bottomCircleTop = centers[i + 1] - CIRCLE / 2;
+                const topPercent = (topCircleBottom / accordionHeight) * 100;
+                const heightPercent = ((bottomCircleTop - topCircleBottom) / accordionHeight) * 100;
+                seg.style.top = topPercent + '%';
+                seg.style.height = Math.max(0, heightPercent) + '%';
+            });
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', function (e) {
+                if (e.target.closest('.accordion__more')) return;
+                const isExpanded = this.classList.contains('accordion__card--expanded');
+                cards.forEach(c => {
+                    c.classList.remove('accordion__card--expanded');
+                    c.querySelector('.accordion__icon').textContent = '+';
+                });
+                if (!isExpanded) {
+                    this.classList.add('accordion__card--expanded');
+                    this.querySelector('.accordion__icon').textContent = '−';
+                }
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(updateAxis);
+                });
+            });
+        });
+
+        document.querySelectorAll('.accordion__more').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const gridId = this.dataset.grid;
+                const hiddenItems = document.querySelectorAll(`#${gridId} .is-hidden`);
+                hiddenItems.forEach(item => item.classList.add('is-visible'));
+                this.style.display = 'none';
+                setTimeout(updateAxis, 150);
+            });
+        });
+
+        updateAxis();
+        window.addEventListener('resize', updateAxis);
+    </script>
+<!-- ── ПОПАП: ДИАГНОСТИКА ЛИКВИДНОСТИ ── -->
+
+<!-- Затемнение -->
+<div id="popup-overlay" class="popup-overlay"></div>
+
+<!-- Окно -->
+<div id="popup" class="popup">
+    
+    <!-- Кнопка закрыть -->
+    <button class="popup__close" id="popup-close">&times;</button>
+
+    <!-- Верхняя часть -->
+    <div class="popup__header">
+        <div class="popup__header-left">
+            <h2 class="popup__title">Диагностика ликвидности</h2>
+            <p class="popup__subtitle">Ответьте на 5 коротких вопросов.<br>Это поможет нам подготовить план работы.</p>
+            <p class="popup__skip"><a href="#" id="popup-skip">Или пропустите опрос и оставьте Ваши данные </a></p>
+
+        </div>
+        <div class="popup__header-right">
+            <div class="popup__counter" id="popup-counter">1 / 5</div>
+            <div class="popup__progress">
+                <div class="popup__progress-fill" id="popup-progress-fill"></div>
+            </div>
+            <div class="popup__nav">
+                <button class="popup__nav-btn" id="popup-prev">&lt;</button>
+                <button class="popup__nav-btn" id="popup-next">&gt;</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup__divider"></div>
+
+    <!-- Вопросы -->
+    <div class="popup__body" id="popup-body"></div>
+
+    <div class="popup__divider"></div>
+
+    <!-- Нижняя часть -->
+    <div class="popup__footer">
+        <div class="popup__footer-left">
+            <div class="popup__shield">
+                <svg viewBox="0 0 24 24"><path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/></svg>
+            </div>
+            <span class="popup__conf">Ваши ответы конфиденциальны<br>и используются только для анализа.</span>
+        </div>
+        <button class="popup__cta" id="popup-cta">
+            Оставьте Ваши данные
+            <span class="popup__cta-arrow">&rarr;</span>
+        </button>
+    </div>
+</div>
+
+<style>
+/* ── Затемнение ── */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1000;
+}
+.popup-overlay.is-open {
+    display: block;
+}
+
+/* ── Окно ── */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 540px;
+    max-width: 90vw;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    z-index: 1001;
+    padding: 36px 36px 28px;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+.popup.is-open {
+    display: block;
+}
+
+/* ── Крестик ── */
+.popup__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: 400;
+    color: #D4A43C;
+    cursor: pointer;
+    line-height: 1;
+    transition: opacity 0.2s;
+}
+.popup__close:hover {
+    opacity: 0.6;
+}
+/* ── Верхняя часть ── */
+.popup__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+.popup__title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1F1F1F;
+    margin-bottom: 6px;
+}
+.popup__subtitle {
+    font-size: 15px;
+    color: #6B6B6B;
+    line-height: 1.5;
+}
+.popup__skip {
+    margin-top: 8px;
+    font-size: 13px;
+}
+.popup__skip a {
+    color: #D4A43C;
+    text-decoration: none;
+}
+.popup__skip a:hover {
+    opacity: 0.7;
+}
+
+
+
+
+
+.popup__header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.popup__counter {
+    font-size: 15px; 
+    font-weight: 600; 
+    color: #D4A43C; 
+    text-align: center;
+}
+.popup__progress {
+    width: 80px;
+    height: 3px;
+    background: #ECEDF0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+.popup__progress-fill {
+    height: 100%;
+    width: 20%;
+    background: #D4A43C;
+    border-radius: 2px;
+    transition: width 0.3s ease-out;
+}
+.popup__nav {
+    display: flex;
+    gap: 6px;
+}
+.popup__nav-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #D4A43C;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #D4A43C;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+.popup__nav-btn:hover {
+    background: rgba(212, 164, 60, 0.08);
+}
+.popup__nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+.popup__nav-btn:disabled:hover {
+    background: transparent;
+}
+
+/* ── Разделитель ── */
+.popup__divider {
+    border-top: 1px solid #ECEDF0;
+    margin: 20px 0;
+}
+
+/* ── Тело: вопрос + ответы ── */
+.popup__body {
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.popup__question {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.popup__qnum {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #D4A43C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #D4A43C;
+    flex-shrink: 0;
+}
+.popup__qtext {
+    font-size: 16.5px;
+    font-weight: 500;
+    color: #1F1F1F;
+    line-height: 1.4;
+    padding-top: 6px;
+}
+.popup__answers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 48px;
+}
+.popup__answer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid rgba(212, 164, 60, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: 14.5px;
+    color: #3A3D42;
+}
+.popup__answer:hover {
+    background: rgba(212, 164, 60, 0.04);
+}
+.popup__answer.is-selected {
+    border-color: #D4A43C;
+    background: rgba(212, 164, 60, 0.06);
+}
+.popup__radio {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid #3A3D42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+}
+.popup__answer.is-selected .popup__radio {
+    border-color: #D4A43C;
+}
+.popup__radio-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background-color 0.2s;
+}
+.popup__answer.is-selected .popup__radio-dot {
+    background: #D4A43C;
+}
+
+/* ── Нижняя часть ── */
+.popup__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+.popup__footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.popup__shield {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+.popup__shield svg {
+    width: 40px;
+    height: 40px;
+    stroke: #D4A43C;
+    fill: none;
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.popup__conf {
+    font-size: 12px;
+    color: #9A9A9A;
+    line-height: 1.5;
+}
+.popup__cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #2F2F2F;
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0 18px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1.5px solid #D4A43C;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s, transform 0.15s;
+    justify-content: center;
+}
+.popup__cta:hover {
+    background-color: #3A3A3A;
+    transform: translateY(-1px);
+}
+.popup__cta-arrow {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+@media (max-width: 1080px) {
+    .popup {
+        padding: 24px 20px 20px;
+    }
+    .popup__header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .popup__header-right {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
+    .popup__footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+}
+</style>
+
+<script>
+(function() {
+    const questions = [
+        { q: "Ваша ликвидность:", answers: ["Бывают кассовые разрывы","Иногда не хватает средств на обязательства","Хватает, но без запаса","Хватает с запасом"] },
+        { q: "Ваш бизнес:", answers: ["Производство","Торговля","Услуги","Проектный бизнес или IT"] },
+        { q: "Вы используете склад:", answers: ["Да","Нет"] },
+        { q: "Ваша зависимость от поставщиков:", answers: ["Критическая (1–2 базовых)","Умеренная (есть альтернативы)","Низкая (легко заменить)"] },
+        { q: "Ваши клиенты платят:", answers: ["Позже, чем нужно платить по обязательствам","Примерно вовремя","Получаем раньше, чем платим"] }
+    ];
+
+    let current = 0;
+    const selected = new Array(5).fill(-1);
+
+    const overlay = document.getElementById('popup-overlay');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('popup-close');
+    const prevBtn = document.getElementById('popup-prev');
+    const nextBtn = document.getElementById('popup-next');
+    const counter = document.getElementById('popup-counter');
+    const progressFill = document.getElementById('popup-progress-fill');
+    const body = document.getElementById('popup-body');
+
+    function renderQuestion(i) {
+        const q = questions[i];
+        let html = '<div class="popup__question"><div class="popup__qnum">' + (i+1) + '</div>';
+        html += '<div class="popup__qtext">' + q.q + '</div></div>';
+        html += '<div class="popup__answers">';
+        q.answers.forEach((a, j) => {
+            const sel = selected[i] === j ? ' is-selected' : '';
+            html += '<div class="popup__answer' + sel + '" data-index="' + j + '">';
+            html += '<div class="popup__radio"><div class="popup__radio-dot"></div></div>';
+            html += '<span>' + a + '</span></div>';
+        });
+        html += '</div>';
+        body.innerHTML = html;
+
+        body.querySelectorAll('.popup__answer').forEach(el => {
+            el.addEventListener('click', function() {
+                const j = parseInt(this.dataset.index);
+                selected[i] = j;
+                body.querySelectorAll('.popup__answer').forEach(a => a.classList.remove('is-selected'));
+                this.classList.add('is-selected');
+                if (i < 4) setTimeout(() => goTo(i + 1), 250);
+            });
+        });
+    }
+
+    function updateUI() {
+        counter.textContent = (current + 1) + ' / 5';
+        progressFill.style.width = ((current + 1) / 5 * 100) + '%';
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === 4;
+    }
+
+    function goTo(i) {
+        current = i;
+        renderQuestion(current);
+        updateUI();
+    }
+
+    function closePopup() {
+        overlay.classList.remove('is-open');
+        popup.classList.remove('is-open');
+    }
+
+    document.querySelector('.hero__side-cta').addEventListener('click', function(e) {
+        e.preventDefault();
+        overlay.classList.add('is-open');
+        popup.classList.add('is-open');
+        goTo(0);
+    });
+
+    closeBtn.addEventListener('click', closePopup);
+    prevBtn.addEventListener('click', function() {
+        if (current > 0) goTo(current - 1);
+    });
+    nextBtn.addEventListener('click', function() {
+        if (current < 4) goTo(current + 1);
+    });
+
+    document.getElementById('popup-cta').addEventListener('click', function() {
+        closePopup();
+        document.getElementById('form-overlay').classList.add('is-open');
+        document.getElementById('form-popup').classList.add('is-open');
+    });
+
+    
+
+
+
+})();
+</script>
+
+
+
+<!-- ── ФОРМА ОБРАТНОЙ СВЯЗИ ── -->
+
+<div id="form-overlay" class="form-overlay"></div>
+
+<div id="form-popup" class="form-popup">
+    <button class="form-popup__close" id="form-close">&times;</button>
+    
+    <h2 class="form-popup__title">Оставьте Ваши данные</h2>
+    <p class="form-popup__subtitle">Мы подготовим персональный план <br> и свяжемся с вами</p>
+    
+    <div class="form-popup__divider"></div>
+    
+    <form id="form-fields">
+        <input type="text" class="form-popup__input" placeholder="Имя" required>
+        <input type="tel" class="form-popup__input" placeholder="Телефон" required pattern="[+]?[0-9]{10,12}" title="Введите номер телефона цифрами, можно с + в начале">
+        <input type="email" class="form-popup__input" placeholder="Email (по желанию)">
+        <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" maxlength="300" rows="3"></textarea>
+
+<label class="form-popup__agree">
+    <input type="checkbox" required>
+    <span>Я соглашаюсь <a href="#" class="form-popup__agree-link">на обработку персональных данных</a></span>
+</label>
+
+
+        <button type="submit" class="form-popup__submit">
+            Отправить
+            <span>&rarr;</span>
+        </button>
+    </form>
+    
+    <p class="form-popup__note">Спасибо за ответы! Мы проанализируем ваши данные.</p>
+</div>
+
+<!-- ── УСПЕШНАЯ ОТПРАВКА ── -->
+
+<div id="success-popup" class="form-popup">
+    <button class="form-popup__close" id="success-close">&times;</button>
+    <h2 class="form-popup__title">Спасибо!</h2>
+    <p class="form-popup__subtitle">Мы свяжемся с вами в ближайшее время.</p>
+</div>
+
+<style>
+.form-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 2000;
+}
+.form-overlay.is-open { display: block; }
+
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 440px;
+    max-width: 90vw;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    z-index: 2001;
+    padding: 36px 36px 28px;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+.form-popup.is-open { display: block; }
+
+.form-popup__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: 400;
+    color: #D4A43C;
+    cursor: pointer;
+    line-height: 1;
+}
+.form-popup__close:hover { opacity: 0.6; }
+
+.form-popup__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1F1F1F;
+    margin-bottom: 6px;
+}
+.form-popup__subtitle {
+    font-size: 14px;
+    color: #6B6B6B;
+    line-height: 1.5;
+}
+.form-popup__divider {
+    border-top: 1px solid #ECEDF0;
+    margin: 20px 0;
+}
+.form-popup__input {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(212,164,60,0.5);
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: #1F1F1F;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.form-popup__input:focus {
+    border-color: #D4A43C;
+}
+.form-popup__input::placeholder {
+    color: #9A9A9A;
+}
+.form-popup__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background-color: #2F2F2F;
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1.5px solid #D4A43C;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background-color 0.2s, transform 0.15s;
+}
+.form-popup__submit:hover {
+    background-color: #3A3A3A;
+    transform: translateY(-1px);
+}
+
+
+
+.form-popup__agree {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #6B6B6B;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+.form-popup__agree input {
+    margin-top: 2px;
+    accent-color: #D4A43C;
+}
+.form-popup__agree-link {
+    color: #D4A43C;
+    text-decoration: underline;
+}
+
+
+
+.form-popup__note {
+    font-size: 12px;
+    color: #9A9A9A;
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.5;
+}
+</style>
+
+<script>
+(function() {
+    const formOverlay = document.getElementById('form-overlay');
+    const formPopup = document.getElementById('form-popup');
+    const successPopup = document.getElementById('success-popup');
+    const formClose = document.getElementById('form-close');
+    const successClose = document.getElementById('success-close');
+    const form = document.getElementById('form-fields');
+
+    // Открыть форму по CTA из попапа
+    document.getElementById('popup-cta').addEventListener('click', function() {
+        document.getElementById('popup-overlay').classList.remove('is-open');
+        document.getElementById('popup').classList.remove('is-open');
+        formOverlay.classList.add('is-open');
+        formPopup.classList.add('is-open');
+    });
+
+    // Закрыть форму
+    function closeForm() {
+        formOverlay.classList.remove('is-open');
+        formPopup.classList.remove('is-open');
+    }
+    formClose.addEventListener('click', closeForm);
+
+    // Закрыть успех
+    function closeSuccess() {
+        formOverlay.classList.remove('is-open');
+        successPopup.classList.remove('is-open');
+    }
+    successClose.addEventListener('click', closeSuccess);
+
+    // Отправка
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // ЗДЕСЬ БУДЕТ AJAX-ОТПРАВКА НА ПОЧТУ (добавим позже)
+        formPopup.classList.remove('is-open');
+        successPopup.classList.add('is-open');
+    });
+})();
+</script>
+
+<script>
+(function() {
+    const track = document.getElementById('cases-track');
+    const prev = document.getElementById('cases-prev');
+    const next = document.getElementById('cases-next');
+    const counter = document.getElementById('cases-counter');
+    let current = 0;
+    const total = 3;
+
+    function update() {
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    }
+
+    prev.addEventListener('click', function() {
+        current--;
+        if (current < 0) current = total - 1;
+        update();
+    });
+    next.addEventListener('click', function() {
+        current++;
+        if (current >= total) current = 0;
+        update();
+    });
+
+
+
+    update();
+})();
+</script>
+
+<script>
+document.getElementById('copy-email').addEventListener('click', function(e) {
+    e.preventDefault();
+    navigator.clipboard.writeText('dmitry@bugaevsky.ru');
+});
+</script>
+
+
+<!-- ═══════════════════════════════════════ -->
+<!-- СЕКЦИЯ 3: ТЕМАТИЧЕСКАЯ ИНФОРМАЦИЯ      -->
+<!-- ═══════════════════════════════════════ -->
+
+
+<section class="articles">
+    
+    <div class="articles__header">
+        <h2 class="articles__title">Тематическая информация</h2>
+    </div>
+
+    <div class="articles__content">
+        
+        <div class="articles__main">
+
+            <!-- Статья 1: Как управлять затратами -->
+            <div class="article-card" id="article-1">
+                <h3 class="article-card__title">Как управлять затратами при кризисе ликвидности?</h3>
+                <p class="article-card__preview">У каждой компании есть определённые расходы и у каждого типа расходов — своя гибкость при сокращении в период кризиса ликвидности. Часть расходов можно сократить сразу и без последствий — например, отложить проекты, а часть даёт отсроченный эффект: сегодня незаметен, а позже снижает выручку.</p>
+                <div class="article-card__full" style="display:none;">
+                    <p>Отдельные статьи — это стратегические расходы, от которых зависит выполнение обязательств и непрерывность работы бизнеса. Они не сокращаются равномерно, а управляются по степени влияния на денежный поток. Ошибки в управлении ими ведут к сбоям, штрафам и блокировкам.</p>
+                    <p>Главный принцип: расходы нельзя сокращать равномерно — ими нужно управлять по степени влияния на денежный поток и скорость возврата денег.</p>
+                    <p>Непросчитанное сокращение расходов нарушает денежный поток и повышает риск денежных разрывов, возникающих из-за неравномерности операционного денежного цикла.</p>
+                    <p>Кризис ликвидности, как итог неравномерного распределения потока, который компания сможет пройти при наличии запаса ликвидности. Именно такой подход позволяет управлять ситуацией — продлевая жизнь бизнесу и проходя кризисы без денежных разрывов.</p>
+                    <p><em>#денежныеразрывы #ликвидность #денежныйпоток #управлениерасходами #антикризисныйменеджмент</em></p>
+                </div>
+                <button class="article-card__toggle" data-article="article-1">Читать полностью →</button>
+            </div>
+
+            <!-- Статья 2: Работа с налогами -->
+            <div class="article-card" id="article-2">
+                <h3 class="article-card__title">Работа с налогами и сборами в условиях кризиса ликвидности.</h3>
+                <p class="article-card__preview">Налоги относятся к обязательным платежам с максимальным приоритетом. На практике их просрочка быстро приводит к начислению пеней и блокировке счетов, что дополнительно ухудшает ликвидность компании. Поэтому в кризисе ликвидности налоги не «управляются отказом», а лишь перераспределяются во времени или корректируются в рамках допустимых механизмов НК РФ.</p>
+                <div class="article-card__full" style="display:none;">
+                    <p><strong>Основные инструменты (в рамках практики НК РФ):</strong></p>
+                    <p>1. Отсрочка и рассрочка (ст. 64 НК РФ). Применяется при наличии оснований: угроза банкротства, падение доходов, кассовые разрывы, задержки оплат. На практике решение зависит от доказательной базы, обеспечения и позиции налогового органа, и не гарантируется автоматически.</p>
+                    <p>2. Перенос убытков (ст. 283 НК РФ). Позволяет уменьшать налог на прибыль за счёт убытков прошлых периодов. Используется как стандартный механизм сглаживания налоговой нагрузки.</p>
+                    <p>3. Инвестиционный вычет (ст. 286.1 НК РФ). Применяется при инвестициях в основные средства и позволяет снижать налог на прибыль в пределах установленных правил.</p>
+                    <p>Штрафы и проверки. Штрафы могут быть снижены при наличии смягчающих обстоятельств (ст. 112, 114 НК РФ), но это всегда оценка налогового органа или суда. Срок давности привлечения к ответственности — 3 года (ст. 113 НК РФ).</p>
+                    <p>Налоговые проверки в кризисных компаниях чаще проходят по риск-ориентированной модели, где учитываются рентабельность, налоговая нагрузка и структура контрагентов.</p>
+                    <p>Практическая логика. В реальности все инструменты работают не автоматически, а через взаимодействие с налоговым органом и зависят от финансового состояния компании и качества её документооборота. НК РФ (ст. 64, 283, 286.1) задаёт правовую рамку, но фактическое применение всегда включает оценку ситуации налоговым органом.</p>
+                    <p><em>#налоги #ликвидность #НКРФ #ст64НКРФ #ст283НКРФ #ст2861НКРФ #денежныйпоток #антикризисноеуправление</em></p>
+                </div>
+                <button class="article-card__toggle" data-article="article-2">Читать полностью →</button>
+            </div>
+
+            <!-- Статья 3: Ковенанты -->
+            <div class="article-card" id="article-3">
+                <h3 class="article-card__title">Ковенанты и их влияние на управление ликвидностью.</h3>
+                <p class="article-card__preview">Даже если компания пересобрала структуру затрат и сформировала запас ликвидности, это не означает полной управляемости. При наличии внешнего финансирования часть решений определяется условиями договора и позицией кредитора.</p>
+                <div class="article-card__full" style="display:none;">
+                    <p>Ковенанты — это дополнительные условия финансирования, которые фиксируют параметры финансовой устойчивости компании и дают кредитору право реагировать на их нарушение. Они могут включать требования к долговой нагрузке, денежному потоку, остаткам на счетах, дивидендам и новым заимствованиям.</p>
+                    <p>В российских кредитных договорах термин «ковенант» может отсутствовать, но по сути используются аналогичные условия — запреты на сделки, поддержание финансовых показателей, обязанности по раскрытию информации и уведомлениям. С 2018 года ст. 821.1 ГК РФ прямо допускает включение условий, при которых кредитор вправе потребовать досрочного возврата кредита при нарушении заемщиком установленных обязательств.</p>
+                    <p>При анализе договора важно не наличие термина «ковенант», а выявление всех дополнительных обязательств заемщика, нарушение которых может дать кредитору право пересмотреть условия финансирования или потребовать досрочного погашения.</p>
+                    <p>Нарушение ковенантов не всегда означает дефолт. На практике это рассматривается как сигнал о возможном ухудшении финансового положения компании. Далее, как правило, следует уведомление и обсуждение ситуации. Компания может получить время на устранение нарушения либо согласовать изменение условий договора.</p>
+                    <p>Возможные последствия включают: пересмотр условий финансирования, повышение процентной ставки, ограничение новых кредитных операций, в отдельных случаях — требование досрочного погашения.</p>
+                    <p>На практике ковенанты часто действуют как «отложенный механизм»: формально фиксируются в договоре, но применяются строго при ухудшении финансового состояния. При этом они напрямую связаны с ликвидностью. Нарушения часто возникают не только при падении выручки, но и при изменении структуры оборотного капитала — росте дебиторской задолженности, запасов или денежных разрывов.</p>
+                    <p>Управление затратами и формирование запаса ликвидности должно учитывать не только внутреннюю модель компании, но и договорные ограничения внешнего финансирования. Ковенанты — это договорный механизм контроля, который связывает финансовое состояние компании с условиями доступа к ликвидности.</p>
+                    <p><em>#ковенанты #ликвидность #гкРФ #8211гкРФ #денежныйпоток #запасликвидности #управлениерасходами #финансирование #антикризисноеуправление</em></p>
+                </div>
+                <button class="article-card__toggle" data-article="article-3">Читать полностью →</button>
+            </div>
+
+            <!-- Статья 4: Запас ликвидности -->
+            <div class="article-card" id="article-4">
+                <h3 class="article-card__title">Запас ликвидности: как ключ к устойчивости бизнеса.</h3>
+                <p class="article-card__preview">Для формирования запаса ликвидности компании важно учесть обязательства. Их можно условно разделить на несколько групп по степени критичности и влияния на устойчивость бизнеса. К ним относятся налоговые и обязательные иные платежи, долговые обязательства перед кредиторами, выплаты персоналу, а также операционные расходы.</p>
+                <div class="article-card__full" style="display:none;">
+                    <p>Каждая из этих групп отличается по характеру последствий при нарушении: от административных ограничений и финансовых санкций до операционных сбоев, ухудшения отношений с контрагентами и потери управляемости бизнесом.</p>
+                    <p>В рамках формирования запаса ликвидности важно учитывать совокупность этих обязательств. Компания, которая заранее разделяет обязательства по уровням критичности и формирует под них резерв, снижает риск финансового кризиса и сохраняет контроль над бизнесом даже при приближающемся кризисе ликвидности.</p>
+                    <p><em>#запасликвидности #ликвидность #денежныйпоток #обязательства #финансоваяустойчивость #антикризисноеуправление</em></p>
+                </div>
+                <button class="article-card__toggle" data-article="article-4">Читать полностью →</button>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<style>
+
+/* ── Секция 3: Тематическая информация ── */
+.articles {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px 0;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+
+.articles__header {
+    margin-left: 64px;
+    margin-bottom: 32px;
+    max-width: 820px;
+    text-align: center;
+}
+.articles__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1F1F1F;
+    line-height: 1.4;
+}
+
+.articles__content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.articles__main {
+    flex: 1;
+    max-width: 820px;
+    margin-left: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ── Карточка статьи ── */
+.article-card {
+    padding: 0;
+}
+.article-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1F1F1F;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+}
+.article-card__preview {
+    font-size: 15px;
+    color: #3A3D42;
+    line-height: 1.55;
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.01em;
+    margin-bottom: 12px;
+}
+.article-card__full {
+    font-size: 15px;
+    color: #3A3D42;
+    line-height: 1.55;
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.01em;
+    margin-top: 16px;
+}
+.article-card__full p {
+    margin-bottom: 12px;
+}
+.article-card__toggle {
+    background: none;
+    border: none;
+    color: #D4A43C;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    transition: opacity 0.2s;
+}
+.article-card__toggle:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 1100px) {
+    .articles__header {
+             margin: 0 auto 30px !important; 
+            text-align: center !important;
+}    
+}
+
+@media (max-width: 1080px) {
+    .articles {
+        padding: 0 20px 50px 0;
+    }
+    
+    .article-card__title {
+        font-size: 16px;
+    }
+}
+</style>
+
+<script>
+document.querySelectorAll('.article-card__toggle').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const article = document.getElementById(this.dataset.article);
+        const full = article.querySelector('.article-card__full');
+        const preview = article.querySelector('.article-card__preview');
+        if (full.style.display === 'none') {
+            full.style.display = 'block';
+            preview.style.display = 'block';
+            this.textContent = 'Свернуть';
+        } else {
+            full.style.display = 'none';
+            preview.style.display = 'block';
+            this.textContent = 'Читать полностью →';
+        }
+    });
+});
+</script>
+
+
+<!-- ── ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ── -->
+
+<div id="privacy-overlay" class="form-overlay" style="z-index:3000;"></div>
+
+<div id="privacy-popup" class="form-popup" style="z-index:3001; max-height:80vh; overflow-y:auto;">
+<button class="form-popup__close" id="privacy-close"></button>    
+<h2 class="form-popup__title">Политика конфиденциальности</h2>
+    <div class="form-popup__divider"></div>
+    <div class="privacy__text">
+        <p>Настоящая Политика конфиденциальности действует в отношении всей информации, которую сайт bugaevsky.ru может получить о Пользователе во время использования сайта.</p>
+        
+        <h3>1. Сбор данных.</h3>
+        <p>Мы собираем только те данные, которые Пользователь оставляет добровольно при заполнении форм: ФИО, телефон, e-mail. Иные данные на сайте не собираются и не обрабатываются.</p>
+        
+        <h3>2. Файлы cookie.</h3>
+        <p>Сайт может собирать обезличенные данные с помощью файлов cookie и аналогичных технологий для обеспечения корректной работы и анализа посещаемости. Продолжая использовать сайт, Пользователь соглашается с этим. В любой момент Пользователь может отключить cookie в настройках браузера.</p>
+        
+        <h3>3. Цели обработки.</h3>
+        <p>Обработка персональных данных осуществляется на основании согласия Пользователя (Федеральный закон № 152-ФЗ «О персональных данных») исключительно для:</p>
+        <p>— обработки заявок и обращений,<br>— связи с Пользователем по оставленным контактам,<br>— оказания услуг (консультации, расчеты, сервисы сайта).</p>
+        
+        <h3>4. Срок хранения.</h3>
+        <p>Срок хранения персональных данных не превышает 2 (двух) лет с момента последнего обращения Пользователя, если иной срок не установлен действующим законодательством РФ. По истечении срока данные подлежат уничтожению.</p>
+        
+        <h3>5. Защита данных.</h3>
+        <p>Мы применяем необходимые технические и организационные меры для защиты персональных данных от неправомерного доступа, уничтожения, изменения, блокирования, копирования и иных неправомерных действий.</p>
+        
+        <h3>6. Права Пользователя.</h3>
+        <p>Пользователь вправе в любой момент отозвать согласие на обработку данных, запросить информацию об объеме хранящихся данных, потребовать их уточнения, блокировки или уничтожения. Для этого достаточно направить запрос на электронную почту указанную на сайте. Запрос на удаление выполняется в течение 15 рабочих дней.</p>
+        
+        <h3>7. Отказ от ответственности.</h3>
+        <p>Сайт не проверяет достоверность предоставленной информации, полагая, что Пользователь действует добросовестно. Сайт не несет ответственности за использование персональных данных Пользователя третьими лицами, с которыми Пользователь взаимодействует в рамках использования сайта, если такие данные были переданы им напрямую.</p>
+        
+        <h3>8. Изменение Политики.</h3>
+        <p>Новая редакция Политики вступает в силу с момента публикации на Сайте. Существенные изменения целей обработки данных сопровождаются отдельным запросом согласия Пользователя.</p>
+        
+        <h3>9. Контакты.</h3>
+        <p>По всем вопросам, связанным с обработкой персональных данных, обращайтесь по адресу электронной почты указанной на сайте.</p>
+    </div>
+</div>
+
+
+
+<style>
+.privacy__text {
+    font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    color: #3A3D42;
+    line-height: 1.6;
+}
+.privacy__text h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1F1F1F;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+.privacy__text p {
+    margin-bottom: 10px;
+}
+</style>
+
+
+<script>
+document.getElementById('privacy-close').addEventListener('click', function() {
+    document.getElementById('privacy-overlay').classList.remove('is-open');
+    document.getElementById('privacy-popup').classList.remove('is-open');
+});
+document.getElementById('privacy-overlay').addEventListener('click', function() {
+    document.getElementById('privacy-overlay').classList.remove('is-open');
+    document.getElementById('privacy-popup').classList.remove('is-open');
+    document.getElementById('form-overlay').classList.add('is-open');
+});
+document.querySelector('.form-popup__agree-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('form-overlay').classList.remove('is-open');
+    document.getElementById('privacy-overlay').classList.add('is-open');
+    document.getElementById('privacy-popup').classList.add('is-open');
+});
+</script>
+
+<script>
+document.querySelector('input[type="tel"]').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^0-9+]/g, '');
+});
+</script>
+
+
+<script>
+document.getElementById('phone-toggle').addEventListener('click', function() {
+    this.innerHTML = '+7 (931) 708 33 34';
+    this.style.cursor = 'default';
+});
+</script>
+
+
+<script>
+document.getElementById('phone-toggle-mobile').addEventListener('click', function() {
+    this.innerHTML = '+7 (931) 708 33 34';
+    this.style.cursor = 'default';
+});
+document.getElementById('copy-email-mobile').addEventListener('click', function() {
+    navigator.clipboard.writeText('dmitry@bugaevsky.ru');
+    alert('Скопировано: dmitry@bugaevsky.ru');
+});
+</script>
+
+
+<script>
+document.getElementById('cta-mobile').addEventListener('click', function(e) {
+    e.preventDefault();
+    var overlay = document.getElementById('popup-overlay');
+    var popup = document.getElementById('popup');
+    overlay.classList.add('is-open');
+    popup.classList.add('is-open');
+    // вызов goTo через dispatchEvent на стрелку
+    document.getElementById('popup-next').click();
+    document.getElementById('popup-prev').click();
+});
+</script>
+
+
+<script>
+document.getElementById('copy-email').addEventListener('click', function() {
+    var email = 'dmitry@bugaevsky.ru';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(email);
+    } else {
+        var tmp = document.createElement('textarea');
+        tmp.value = email;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+    }
+});
+</script>
+
+</body>
+</html>
