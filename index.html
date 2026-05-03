@@ -1827,7 +1827,12 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
         popup.classList.add('is-open');
         goTo(0);
     });
-
+document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('click', function(e) {
+    e.preventDefault();
+    overlay.classList.add('is-open');
+    popup.classList.add('is-open');
+    goTo(0);
+});
     closeBtn.addEventListener('click', closePopup);
     prevBtn.addEventListener('click', function() {
         if (current > 0) goTo(current - 1);
