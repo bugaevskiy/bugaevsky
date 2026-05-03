@@ -2400,8 +2400,18 @@ document.getElementById('phone-toggle-mobile').addEventListener('click', functio
     this.style.cursor = 'default';
 });
 document.getElementById('copy-email-mobile').addEventListener('click', function() {
-    navigator.clipboard.writeText('dmitry@bugaevsky.ru');
-   });
+    var email = 'dmitry@bugaevsky.ru';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(email);
+    } else {
+        var tmp = document.createElement('textarea');
+        tmp.value = email;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+    }
+});
 </script>
 
 
