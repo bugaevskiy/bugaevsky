@@ -223,8 +223,8 @@
             display: none;
             grid-template-columns: 1fr 1fr;
             gap: 0 20px;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
             border-top: 1px solid var(--divider);
             font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
             font-size: 16.5px;
@@ -267,7 +267,9 @@
 #grid-1 .grid-item:first-child {
     margin-top: -15px;
 }
-     }
+ #grid-1 .grid-item:nth-child(2) {
+    align-self: flex-start;
+}
 #grid-2,
 #grid-3,
 #grid-4 {
