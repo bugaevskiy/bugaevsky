@@ -171,18 +171,18 @@
         }
 
         .accordion__card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 20px 20px;
-            cursor: pointer;
-            transition: box-shadow 0.25s ease-out, background-color 0.25s ease-out;
-            display: flex;
-            align-items:align-items: flex-start;
-            gap: 0;
-            position: relative;
-            width: 100%;
-        }
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px 20px;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease-out, background-color 0.25s ease-out;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    width: 100%;
+}
 
         .accordion__card--expanded {
             box-shadow: var(--card-shadow-open);
@@ -218,14 +218,13 @@
            font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
            letter-spacing: 0.015em;
         }
-
-        /* Сетка состава */
+/* Сетка состава */
         .accordion__grid {
             display: none;
             grid-template-columns: 1fr 1fr;
             gap: 0 20px;
-            margin-top: 18px;
-            padding-top: 18px;
+            margin-top: 10px;
+            padding-top: 10px;
             border-top: 1px solid var(--divider);
             font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
             font-size: 16.5px;
@@ -272,8 +271,8 @@
 #grid-2,
 #grid-3,
 #grid-4 {
-    margin-top: 0px;
-    padding-top: 0px;
+    margin-top: -6px;
+    padding-top: -6px;
 }
      
 #grid-2 .grid-item,
