@@ -1915,8 +1915,6 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 
 
 <!-- ── ФОРМА ОБРАТНОЙ СВЯЗИ ── -->
-
-
 <!-- ── ФОРМА ОБРАТНОЙ СВЯЗИ ── -->
 
 <div id="form-overlay" class="form-overlay"></div>
@@ -1950,16 +1948,6 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 </div>
 
 <!-- ── УСПЕШНАЯ ОТПРАВКА ── -->
-
-
-
-
-
-
-
-
-
- 
 <!-- ── УСПЕШНАЯ ОТПРАВКА ── -->
 
 <style>
@@ -2535,9 +2523,6 @@ document.getElementById('phone-copy').addEventListener('click', function() {
 });
 </script>
 
-
-
-
 <script>
 document.getElementById('form-fields').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -2566,8 +2551,8 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
         mode: 'no-cors'
     })
     .then(function() {
+        document.getElementById('form-overlay').classList.remove('is-open');
         document.getElementById('form-popup').classList.remove('is-open');
-        document.getElementById('success-popup').classList.add('is-open');
         f.reset();
     })
     .catch(function() {
@@ -2578,10 +2563,5 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
 
 
 
-
- 
-
- 
- 
 </body>
 </html>
