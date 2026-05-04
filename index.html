@@ -1903,7 +1903,10 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
         document.getElementById('form-popup').classList.add('is-open');
     });
 
-    
+    window.getSelectedAnswers = function() { return selected; };
+    window.getQuestions = function() { return questions; };
+
+})();
 
 
 
@@ -2559,16 +2562,19 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     var d = new FormData(f);
     var url = 'https://script.google.com/macros/s/AKfycbxrGVeEBR0m5m5PPn8ZQLhO47iFtd7Vmt4WbG0It_i9atrzryrVcCgYz57TlJGa2Db9WQ/exec';
     
+    var sel = window.getSelectedAnswers ? window.getSelectedAnswers() : [];
+    var qs = window.getQuestions ? window.getQuestions() : [];
+    
     var data = {
         name: d.get('name') || '',
         phone: d.get('phone') || '',
         email: d.get('email') || '',
         comment: d.get('comment') || '',
-        q1: (typeof selected !== 'undefined' && selected[0] >= 0) ? questions[0].answers[selected[0]] : '',
-        q2: (typeof selected !== 'undefined' && selected[1] >= 0) ? questions[1].answers[selected[1]] : '',
-        q3: (typeof selected !== 'undefined' && selected[2] >= 0) ? questions[2].answers[selected[2]] : '',
-        q4: (typeof selected !== 'undefined' && selected[3] >= 0) ? questions[3].answers[selected[3]] : '',
-        q5: (typeof selected !== 'undefined' && selected[4] >= 0) ? questions[4].answers[selected[4]] : ''
+        q1: sel[0] >= 0 ? qs[0].answers[sel[0]] : '',
+        q2: sel[1] >= 0 ? qs[1].answers[sel[1]] : '',
+        q3: sel[2] >= 0 ? qs[2].answers[sel[2]] : '',
+        q4: sel[3] >= 0 ? qs[3].answers[sel[3]] : '',
+        q5: sel[4] >= 0 ? qs[4].answers[sel[4]] : ''
     };
     
     fetch(url, {
@@ -2586,13 +2592,6 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     });
 });
 </script>
-
-
-
-
-
-
-
 
 
 
