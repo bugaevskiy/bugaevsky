@@ -598,13 +598,16 @@ text-shadow: 0 0 0.5px #1F1F1F;
         margin: 0 auto 30px !important;
         text-align: center !important;
    
-    }
-             #theme-toggle {
+    }    #theme-toggle {
         top: 20px;
         right: 20px;
         bottom: auto;
+        left: auto;
         width: 42px;
         height: 42px;
+        background: #141416;
+        border-color: #C6922B;
+        color: #C6922B;
     }
         }
 
@@ -916,7 +919,17 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] .popup__skip a { color: #C6922B; }
 [data-theme="dark"] .popup__divider { border-top-color: #2A2A2E; }
 [data-theme="dark"] .popup__conf { color: #6F6F73; }    
-
+[data-theme="dark"] .form-popup__input {
+    background: #1A1A1D;
+    color: #EDEDED;
+    border-color: #5A4720;
+}
+[data-theme="dark"] .form-popup__input::placeholder {
+    color: #6F6F73;
+}
+[data-theme="dark"] .form-popup__agree {
+    color: #A0A0A3;
+}
 
                                                             
     </style>
