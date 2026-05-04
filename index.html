@@ -1570,6 +1570,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
             card.addEventListener('click', function (e) {
                 if (e.target.closest('.accordion__more')) return;
                 const isExpanded = this.classList.contains('accordion__card--expanded');
+                var scrollTop = window.scrollY;
                 cards.forEach(c => {
                     c.classList.remove('accordion__card--expanded');
                     c.querySelector('.accordion__icon').textContent = '+';
@@ -1579,11 +1580,15 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
                     this.querySelector('.accordion__icon').textContent = '−';
                 }
                 requestAnimationFrame(() => {
-                    requestAnimationFrame(updateAxis);
+                    requestAnimationFrame(() => {
+                        updateAxis();
+                        window.scrollTo(0, scrollTop);
+                    });
                 });
             });
         });
 
+     
         document.querySelectorAll('.accordion__more').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
