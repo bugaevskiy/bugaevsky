@@ -598,6 +598,24 @@ text-shadow: 0 0 0.5px #1F1F1F;
         margin: 0 auto 30px !important;
         text-align: center !important;
        }  
+
+
+    #theme-toggle { display: none; }
+    #theme-toggle-1100 {
+        display: block;
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 9999;
+        width: 42px;
+        height: 42px;
+        border: 1px solid #D4A43C;
+        border-radius: 50%;
+        background: #FFFFFF;
+        color: #D4A43C;
+        cursor: pointer;
+    }
+                                                                  
           #theme-toggle {
         top: 16px;
         right: 16px;
@@ -2736,8 +2754,13 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
 })();
 </script>
 
-
-
+<button id="theme-toggle-1100" style="display:none;">🌓</button>
+ 
+<script>
+document.getElementById('theme-toggle-1100').addEventListener('click', function() {
+    document.getElementById('theme-toggle').click();
+});
+</script>
 
 
  
