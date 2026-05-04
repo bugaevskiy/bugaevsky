@@ -2459,26 +2459,12 @@ document.getElementById('phone-toggle').addEventListener('click', function() {
 </script>
 
 
+
 <script>
-document.getElementById('phone-toggle-mobile').addEventListener('click', function() {
-    this.innerHTML = '+7 (931) 708 33 34';
-    this.style.cursor = 'default';
-});
 document.getElementById('copy-email-mobile').addEventListener('click', function() {
-    var email = 'dmitry@bugaevsky.ru';
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(email);
-    } else {
-        var tmp = document.createElement('textarea');
-        tmp.value = email;
-        document.body.appendChild(tmp);
-        tmp.select();
-        document.execCommand('copy');
-        document.body.removeChild(tmp);
-    }
+    navigator.clipboard.writeText('dmitry@bugaevsky.ru');
 });
 </script>
-
 
 <script>
 document.getElementById('cta-mobile').addEventListener('click', function(e) {
