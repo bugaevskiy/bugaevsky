@@ -1927,12 +1927,12 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
     <div class="form-popup__divider"></div>
     
     <form id="form-fields">
-        <input type="text" class="form-popup__input" placeholder="Имя" required>
-        <input type="tel" class="form-popup__input" placeholder="Телефон" required pattern="[+]?[0-9]{10,12}" title="Введите номер телефона цифрами, можно с + в начале">
-        <input type="email" class="form-popup__input" placeholder="Email (по желанию)">
-        <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" maxlength="300" rows="3"></textarea>
+        <input type="text" class="form-popup__input" placeholder="Имя" name="name" required>
+        <input type="tel" class="form-popup__input" placeholder="Телефон" name="phone" required pattern="[+]?[0-9]{10,12}" title="Введите номер телефона цифрами, можно с + в начале">
+        <input type="email" class="form-popup__input" placeholder="Email (по желанию)" name="email">
+        <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" name="comment" maxlength="300" rows="3"></textarea>
 
-<label class="form-popup__agree">
+     <label class="form-popup__agree">
     <input type="checkbox" required>
     <span>Я соглашаюсь <a href="#" class="form-popup__agree-link">на обработку персональных данных</a></span>
 </label>
@@ -2543,7 +2543,30 @@ document.getElementById('phone-copy').addEventListener('click', function() {
 
 
 
-
+<script>
+document.getElementById('form-fields').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var f = this;
+    var d = new FormData(f);
+    var url = 'https://docs.google.com/forms/d/e/1FAIpQLSdnvY2_jOqeAjpOwnZANoA2EgVDnTASlOAdu6pKIuPiT4JOfw/formResponse';
+    
+    var params = new URLSearchParams();
+    params.append('entry.1045781291', d.get('name'));
+    params.append('entry.1166974632', d.get('phone'));
+    params.append('entry.1994831655', d.get('email'));
+    params.append('entry.1063877315', d.get('comment'));
+    
+    fetch(url, {method: 'POST', body: params, mode: 'no-cors'})
+    .then(function() {
+        document.getElementById('form-popup').classList.remove('is-open');
+        document.getElementById('success-popup').classList.add('is-open');
+        f.reset();
+    })
+    .catch(function() {
+        alert('Ошибка. Попробуйте позже.');
+    });
+});
+</script>
  
  
 </body>
