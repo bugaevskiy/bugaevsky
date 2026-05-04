@@ -599,7 +599,13 @@ text-shadow: 0 0 0.5px #1F1F1F;
         text-align: center !important;
    
     }
-         
+             #theme-toggle {
+        top: 20px;
+        right: 20px;
+        bottom: auto;
+        width: 42px;
+        height: 42px;
+    }
         }
 
 
@@ -861,9 +867,28 @@ text-shadow: 0 0 0.5px #1F1F1F;
     --subtitle-color: #A0A0A3;
     --title-soft: #EDEDED;
     --grid-text: #A0A0A3;
-    --toggle-bg: #1A1A1D;
+ }
+[data-theme="dark"] .hero__title {
+    color: #EDEDED;
 }
-
+[data-theme="dark"] .hero__subtitle {
+    color: #A0A0A3;
+}
+[data-theme="dark"] .popup,
+[data-theme="dark"] .form-popup {
+    background: #141416;
+    color: #EDEDED;
+}
+[data-theme="dark"] .popup__title,
+[data-theme="dark"] .form-popup__title {
+    color: #EDEDED;
+}
+[data-theme="dark"] .accordion__card {
+    background: #141416;
+}
+[data-theme="dark"] .accordion__card--expanded {
+    background: #1A1A1D;
+}
 /* В ночной теме: кнопка становится тёмной с бронзой */
 [data-theme="dark"] #theme-toggle {
     background: #141416;
