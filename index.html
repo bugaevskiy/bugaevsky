@@ -2545,10 +2545,11 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
         q5: sel[4] >= 0 ? qs[4].answers[sel[4]] : ''
     };
     
-    fetch(url, {
+     fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
-        mode: 'no-cors'
+        mode: 'cors',
+        redirect: 'follow'
     })
     .then(function() {
         document.getElementById('form-overlay').classList.remove('is-open');
