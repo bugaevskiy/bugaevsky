@@ -1931,7 +1931,11 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
         <input type="tel" class="form-popup__input" placeholder="Телефон" name="phone" required pattern="[+]?[0-9]{10,12}" title="Введите номер телефона цифрами, можно с + в начале">
         <input type="email" class="form-popup__input" placeholder="Email (по желанию)" name="email">
         <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" name="comment" maxlength="300" rows="3"></textarea>
-
+        <input type="hidden" name="q1" id="hidden-q1">
+        <input type="hidden" name="q2" id="hidden-q2">
+        <input type="hidden" name="q3" id="hidden-q3">
+        <input type="hidden" name="q4" id="hidden-q4">
+        <input type="hidden" name="q5" id="hidden-q5">
      <label class="form-popup__agree">
     <input type="checkbox" required>
     <span>Я соглашаюсь <a href="#" class="form-popup__agree-link">на обработку персональных данных</a></span>
@@ -2555,6 +2559,11 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     params.append('entry.1166974632', d.get('phone'));
     params.append('entry.1994831655', d.get('email'));
     params.append('entry.1063877315', d.get('comment'));
+    params.append('entry.2029560278', d.get('q1'));
+    params.append('entry.2032647012', d.get('q2'));
+    params.append('entry.2039605830', d.get('q3'));
+    params.append('entry.2046564648', d.get('q4'));
+    params.append('entry.2053523466', d.get('q5'));
     
     fetch(url, {method: 'POST', body: params, mode: 'no-cors'})
     .then(function() {
@@ -2565,6 +2574,16 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     .catch(function() {
         alert('Ошибка. Попробуйте позже.');
     });
+});
+</script>
+
+<script>
+document.getElementById('popup-cta').addEventListener('click', function() {
+    document.getElementById('hidden-q1').value = selected[0] >= 0 ? questions[0].answers[selected[0]] : '';
+    document.getElementById('hidden-q2').value = selected[1] >= 0 ? questions[1].answers[selected[1]] : '';
+    document.getElementById('hidden-q3').value = selected[2] >= 0 ? questions[2].answers[selected[2]] : '';
+    document.getElementById('hidden-q4').value = selected[3] >= 0 ? questions[3].answers[selected[3]] : '';
+    document.getElementById('hidden-q5').value = selected[4] >= 0 ? questions[4].answers[selected[4]] : '';
 });
 </script>
  
