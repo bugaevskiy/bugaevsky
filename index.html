@@ -528,7 +528,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
     margin: 0 auto;
 }
 
-        @media (max-width: 1100px) {
+                                                                   @media (max-width: 1100px) {
             .hero {
                 padding: 60px 24px 50px 0;
             }
@@ -603,7 +603,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
         }
 
 
-@media (max-width: 1080px) {
+                                                           @media (max-width: 1080px) {
     body {
         overflow-x: hidden;
 
@@ -781,7 +781,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
         margin-top: 4px;
     }
     .hero__mobile-contacts {
-        font-size: 14px;
+        font-size: 16px;
         color: #9A9A9A;
         margin-top: 12px;
         line-height: 1.6;
@@ -796,7 +796,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 .hero__mobile-name {
     display: block;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     color: #9A9A9A;
     margin: 10px auto 8px;
     order: 1;
@@ -814,7 +814,11 @@ text-shadow: 0 0 0.5px #1F1F1F;
 #grid-2 .grid-item:first-child {
     border-bottom: 1px solid var(--divider);
 }
+#copy-email-mobile {
+    font-size: 16px !important;
+}
 
+     
 }
     </style>
 </head>
@@ -938,7 +942,9 @@ text-shadow: 0 0 0.5px #1F1F1F;
                 </div>
             </div>
 
-            <div class="hero__side">
+                                                            <div class="hero__side">
+
+                                                             
                 <div class="hero__litera">
                     <img src="literabronzelight2.png" class="hero__litera-img">
                 </div>
@@ -951,8 +957,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
            <p style="font-size:15px;color:#9A9A9A;margin-top:10px;text-align:center;">Дмитрий Бугаевский</p>
          <!-- Телефон и почта --> 
         <div style="font-size:15px;color:#9A9A9A;line-height:1.6;margin-top:12px;text-align:center"> 
-                         <span id="phone-toggle" style="cursor:pointer;color:#9A9A9A;">+7 (931) 708 <span style="color:#D4A43C;">показать номер</span></span> 
-
+                         <span id="phone-copy" style="cursor:pointer;color:#9A9A9A;">+7&#160;(931)&#160;708&#160;<span class="phone-digits">33&#160;34</span></span>
                          <span id="copy-email" style="cursor:pointer;color:#9A9A9A;">dmitry<span class="at-symbol">[at]</span>bugaevsky<span class="dot-symbol">[dot]</span>ru</span>
                                      <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-left:4px;"> 
                                                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect> <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
@@ -973,12 +978,14 @@ text-shadow: 0 0 0.5px #1F1F1F;
         </div>
 
 
-<div class="hero__mobile-cta">
+                                                            <div class="hero__mobile-cta">
+
+                                                           
     <p class="hero__mobile-brand">Бугаевский консалтинг</p>
     <p class="hero__mobile-slogan">Архитектура операционной эффективности</p>
     <p class="hero__mobile-name">Дмитрий Бугаевский</p>
     <p class="hero__mobile-contacts">
-        <span id="phone-toggle-mobile" style="cursor:pointer;">+7 (931) 708 <span style="color:#D4A43C;">показать номер</span></span><br>
+        <a href="tel:+79317083334" id="phone-call-mobile" style="color:#9A9A9A;text-decoration:none;">+7&#160;(931)&#160;708&#160;<span class="phone-digits">33&#160;34</span></a><br>
         <span id="copy-email-mobile" style="cursor:pointer;color:#9A9A9A;">dmitry@bugaevsky.ru 
     <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-left:4px;">
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -2493,5 +2500,17 @@ document.getElementById('copy-email').addEventListener('click', function() {
 });
 </script>
 
+<script>
+document.getElementById('phone-copy').addEventListener('click', function() {
+    navigator.clipboard.writeText('+79317083334');
+});
+</script>
+
+
+
+
+
+
+ 
 </body>
 </html>
