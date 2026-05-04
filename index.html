@@ -1961,11 +1961,6 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 
  
 <!-- ── УСПЕШНАЯ ОТПРАВКА ── -->
-<div id="success-popup" class="form-popup">
-    <button class="form-popup__close" id="success-close">&times;</button>
-    <h2 class="form-popup__title">Спасибо!</h2>
-    <p class="form-popup__subtitle">Мы свяжемся с вами в ближайшее время.</p>
-</div>
 
 <style>
 .form-overlay {
@@ -2541,17 +2536,6 @@ document.getElementById('phone-copy').addEventListener('click', function() {
 </script>
 
 
-<script>
-document.getElementById('success-close').addEventListener('click', function() {
-    document.getElementById('form-overlay').classList.remove('is-open');
-    document.getElementById('success-popup').classList.remove('is-open');
-});
-document.getElementById('form-overlay').addEventListener('click', function() {
-    document.getElementById('form-overlay').classList.remove('is-open');
-    document.getElementById('success-popup').classList.remove('is-open');
-    document.getElementById('form-popup').classList.remove('is-open');
-});
-</script>
 
 
 <script>
