@@ -2503,7 +2503,38 @@ document.getElementById('phone-copy').addEventListener('click', function() {
 </script>
 
 
-
+<script>
+document.getElementById('form-fields').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var form = this;
+    var data = new FormData(form);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open('POST', 'https://biz.mail.ru/email', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+    var params = 'to=dmitry@bugaevsky.ru' +
+        '&subject=Заявка с сайта bugaevsky.ru' +
+        '&body=' + encodeURIComponent(
+            'Имя: ' + data.get('name') + '\n' +
+            'Телефон: ' + data.get('phone') + '\n' +
+            'Email: ' + data.get('email') + '\n' +
+            'Комментарий: ' + data.get('comment')
+        );
+    
+    xhr.send(params);
+    
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            formPopup.classList.remove('is-open');
+            successPopup.classList.add('is-open');
+        } else {
+            alert('Ошибка отправки. Попробуйте позже.');
+        }
+    };
+});
+</script>
 
 
  
