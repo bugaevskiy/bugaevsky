@@ -820,6 +820,62 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
      
 }
+   
+  /* ── Кнопка переключения темы ─-------------------------------------------------------─ */
+#theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* По умолчанию (светлая тема): видна Луна, скрыто Солнце */
+#sun-icon { display: none; }
+#moon-icon { display: block; }
+
+/* ── Ночная тема ── */
+[data-theme="dark"] {
+    --bg: #0B0B0C;
+    --text: #EDEDED;
+    --text-secondary: #A0A0A3;
+    --text-light: #6F6F73;
+    --accent: #C6922B;
+    --cta-bg: #1A1A1D;
+    --cta-hover: #2A2A2E;
+    --card-bg: #141416;
+    --card-border: #5A4720;
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    --card-shadow-open: 0 8px 24px rgba(0,0,0,0.3);
+    --divider: #2A2A2E;
+    --subtitle-color: #A0A0A3;
+    --title-soft: #EDEDED;
+    --grid-text: #A0A0A3;
+    --toggle-bg: #1A1A1D;
+}
+
+/* В ночной теме: кнопка становится тёмной с бронзой */
+[data-theme="dark"] #theme-toggle {
+    background: #141416;
+    border-color: #C6922B;
+    color: #C6922B;
+}
+
+/* В ночной теме: видно Солнце, скрыта Луна */
+[data-theme="dark"] #sun-icon { display: block; }
+[data-theme="dark"] #moon-icon { display: none; }                                                          
+    
+    
     </style>
 </head>
 <body>
@@ -1358,6 +1414,15 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     .profile__divider {
         display: none;
     }
+
+
+     #theme-toggle {
+        top: 20px;
+        right: 20px;
+        bottom: auto;
+        width: 42px;
+        height: 42px;
+    }
 }
 
 @media (max-width: 1080px) {
@@ -1375,8 +1440,17 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     }
     .case-card {
         padding: 16px;
+     }
+
+     #theme-toggle {
+        top: 20px;
+        right: 20px;
+        bottom: auto;
+        width: 42px;
+        height: 42px;
     }
 }
+ 
 </style>
 
     <script>
@@ -2553,5 +2627,60 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
 </script>
 
 
+<!-- Кнопка переключения темы -------------------------------------------------------------->
+<button id="theme-toggle" title="Переключить тему">
+    <svg id="sun-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg id="moon-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+</button>
+
+
+ <script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const sun = document.getElementById('sun-icon');
+    const moon = document.getElementById('moon-icon');
+
+    // Проверяем сохранённую тему
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        html.dataset.theme = 'dark';
+        sun.style.display = 'block';
+        moon.style.display = 'none';
+    }
+
+    toggle.addEventListener('click', function() {
+        if (html.dataset.theme === 'dark') {
+            html.dataset.theme = 'light';
+            sun.style.display = 'none';
+            moon.style.display = 'block';
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            sun.style.display = 'block';
+            moon.style.display = 'none';
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+})();
+</script>
+
+
+
+
+
+ 
 </body>
 </html>
