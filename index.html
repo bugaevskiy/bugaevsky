@@ -2533,41 +2533,6 @@ document.getElementById('phone-copy').addEventListener('click', function() {
 </script>
 
 
-
-<script>
-document.getElementById('form-fields').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var f = this;
-    var d = new FormData(f);
-    var url = 'https://docs.google.com/forms/d/e/1FAIpQLSdnvY2_jOqeAjpOwnZANoA2EgVDnTASlOAdu6pKIuPiT4JOfw/formResponse';
-    
-    var params = new URLSearchParams();
-    params.append('entry.1045781291', d.get('name'));
-    params.append('entry.1166974632', d.get('phone'));
-    params.append('entry.1994831655', d.get('email'));
-    params.append('entry.1063877315', d.get('comment'));
-    
-    // Ответы на вопросы берутся напрямую из глобального массива selected
-    if (typeof selected !== 'undefined') {
-        params.append('entry.2029560278', selected[0] >= 0 ? questions[0].answers[selected[0]] : '');
-        params.append('entry.2032647012', selected[1] >= 0 ? questions[1].answers[selected[1]] : '');
-        params.append('entry.2039605830', selected[2] >= 0 ? questions[2].answers[selected[2]] : '');
-        params.append('entry.2046564648', selected[3] >= 0 ? questions[3].answers[selected[3]] : '');
-        params.append('entry.2053523466', selected[4] >= 0 ? questions[4].answers[selected[4]] : '');
-    }
-    
-    fetch(url, {method: 'POST', body: params, mode: 'no-cors'})
-    .then(function() {
-        document.getElementById('form-popup').classList.remove('is-open');
-        document.getElementById('success-popup').classList.add('is-open');
-        f.reset();
-    })
-    .catch(function() {
-        alert('Ошибка. Попробуйте позже.');
-    });
-});
-</script>
-
 <script>
 document.getElementById('success-close').addEventListener('click', function() {
     document.getElementById('form-overlay').classList.remove('is-open');
@@ -2579,6 +2544,54 @@ document.getElementById('form-overlay').addEventListener('click', function() {
 });
 </script>
 
+
+
+<script>
+document.getElementById('form-fields').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var f = this;
+    var d = new FormData(f);
+    var url = 'https://script.google.com/macros/s/AKfycbxrGVeEBR0m5m5PPn8ZQLhO47iFtd7Vmt4WbG0It_i9atrzryrVcCgYz57TlJGa2Db9WQ/exec';
+    
+    var data = {
+        name: d.get('name') || '',
+        phone: d.get('phone') || '',
+        email: d.get('email') || '',
+        comment: d.get('comment') || '',
+        q1: (typeof selected !== 'undefined' && selected[0] >= 0) ? questions[0].answers[selected[0]] : '',
+        q2: (typeof selected !== 'undefined' && selected[1] >= 0) ? questions[1].answers[selected[1]] : '',
+        q3: (typeof selected !== 'undefined' && selected[2] >= 0) ? questions[2].answers[selected[2]] : '',
+        q4: (typeof selected !== 'undefined' && selected[3] >= 0) ? questions[3].answers[selected[3]] : '',
+        q5: (typeof selected !== 'undefined' && selected[4] >= 0) ? questions[4].answers[selected[4]] : ''
+    };
+    
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        mode: 'no-cors'
+    })
+    .then(function() {
+        document.getElementById('form-popup').classList.remove('is-open');
+        document.getElementById('success-popup').classList.add('is-open');
+        f.reset();
+    })
+    .catch(function() {
+        alert('Ошибка. Попробуйте позже.');
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+ 
 
  
  
