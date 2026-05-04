@@ -1913,17 +1913,51 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 
 <!-- ── ФОРМА ОБРАТНОЙ СВЯЗИ ── -->
 
+
+<!-- ── ФОРМА ОБРАТНОЙ СВЯЗИ ── -->
+
 <div id="form-overlay" class="form-overlay"></div>
 
 <div id="form-popup" class="form-popup">
     <button class="form-popup__close" id="form-close">&times;</button>
+    
     <h2 class="form-popup__title">Оставьте Ваши данные</h2>
     <p class="form-popup__subtitle">Мы подготовим персональный план <br> и свяжемся с вами</p>
+    
     <div class="form-popup__divider"></div>
-    <div class="formdesigner-widget" data-id="244944"></div>
+    
+    <form id="form-fields">
+        <input type="text" class="form-popup__input" placeholder="Имя" required>
+        <input type="tel" class="form-popup__input" placeholder="Телефон" required pattern="[+]?[0-9]{10,12}" title="Введите номер телефона цифрами, можно с + в начале">
+        <input type="email" class="form-popup__input" placeholder="Email (по желанию)">
+        <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" maxlength="300" rows="3"></textarea>
+
+<label class="form-popup__agree">
+    <input type="checkbox" required>
+    <span>Я соглашаюсь <a href="#" class="form-popup__agree-link">на обработку персональных данных</a></span>
+</label>
+
+
+        <button type="submit" class="form-popup__submit">
+            Отправить
+            <span>&rarr;</span>
+        </button>
+    </form>
+    
     <p class="form-popup__note">Спасибо за ответы! Мы проанализируем ваши данные.</p>
 </div>
 
+<!-- ── УСПЕШНАЯ ОТПРАВКА ── -->
+
+
+
+
+
+
+
+
+
+ 
 <!-- ── УСПЕШНАЯ ОТПРАВКА ── -->
 <div id="success-popup" class="form-popup">
     <button class="form-popup__close" id="success-close">&times;</button>
