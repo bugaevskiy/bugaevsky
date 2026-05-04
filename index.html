@@ -2467,14 +2467,6 @@ document.querySelector('input[type="tel"]').addEventListener('input', function(e
 </script>
 
 
-<script>
-document.getElementById('phone-toggle').addEventListener('click', function() {
-    this.innerHTML = '+7 (931) 708 33 34';
-    this.style.cursor = 'default';
-});
-</script>
-
-
 
 <script>
 document.getElementById('copy-email-mobile').addEventListener('click', function() {
@@ -2586,6 +2578,23 @@ document.getElementById('popup-cta').addEventListener('click', function() {
     document.getElementById('hidden-q5').value = selected[4] >= 0 ? questions[4].answers[selected[4]] : '';
 });
 </script>
+
+
+
+
+
+<script>
+document.getElementById('success-close').addEventListener('click', function() {
+    document.getElementById('form-overlay').classList.remove('is-open');
+    document.getElementById('success-popup').classList.remove('is-open');
+});
+document.getElementById('form-overlay').addEventListener('click', function() {
+    document.getElementById('form-overlay').classList.remove('is-open');
+    document.getElementById('success-popup').classList.remove('is-open');
+});
+</script>
+
+
  
  
 </body>
