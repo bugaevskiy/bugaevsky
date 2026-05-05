@@ -1566,27 +1566,33 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
             });
         }
 
-        cards.forEach(card => {
-            card.addEventListener('click', function (e) {
-                if (e.target.closest('.accordion__more')) return;
-                const isExpanded = this.classList.contains('accordion__card--expanded');
-                var scrollTop = window.scrollY;
-                cards.forEach(c => {
-                    c.classList.remove('accordion__card--expanded');
-                    c.querySelector('.accordion__icon').textContent = '+';
-                });
-                if (!isExpanded) {
-                    this.classList.add('accordion__card--expanded');
-                    this.querySelector('.accordion__icon').textContent = '−';
-                }
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        updateAxis();
-                        window.scrollTo(0, scrollTop);
-                    });
-                });
+       cards.forEach(card => {
+    card.addEventListener('click', function (e) {
+        if (e.target.closest('.accordion__more')) return;
+        const isExpanded = this.classList.contains('accordion__card--expanded');
+        
+        cards.forEach(c => {
+            c.classList.remove('accordion__card--expanded');
+            c.querySelector('.accordion__icon').textContent = '+';
+        });
+        
+        if (!isExpanded) {
+            this.classList.add('accordion__card--expanded');
+            this.querySelector('.accordion__icon').textContent = '−';
+        }
+        
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                updateAxis();
+                // Центрируем открытый слой на экране
+                const rect = this.getBoundingClientRect();
+                const centerY = rect.top + rect.height / 2;
+                const screenCenter = window.innerHeight / 2;
+                window.scrollBy(0, centerY - screenCenter);
             });
         });
+    });
+});
 
      
         document.querySelectorAll('.accordion__more').forEach(btn => {
