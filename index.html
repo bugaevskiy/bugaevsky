@@ -597,40 +597,16 @@ text-shadow: 0 0 0.5px #1F1F1F;
         margin: 0 auto 30px !important;
         text-align: center !important;
        }  
+  #theme-toggle {
+    top: 16px;
+    right: 16px;
+    bottom: auto;
+    left: auto;
+    width: 42px;
+    height: 42px;
+} 
 
-
-    #theme-toggle { display: none; }
-    #theme-toggle-1100 {
-        display: block;
-        position: fixed;
-        top: 16px;
-        right: 16px;
-        z-index: 9999;
-        width: 42px;
-        height: 42px;
-        border: 1px solid #D4A43C;
-        border-radius: 50%;
-        background: #FFFFFF;
-        color: #D4A43C;
-        cursor: pointer;
-    }
-                                                                  
-          #theme-toggle {
-        top: 16px;
-        right: 16px;
-        bottom: auto;
-        left: auto;
-        width: 42px;
-        height: 42px;
-        background: #FFFFFF;
-        border-color: #D4A43C;
-        color: #D4A43C;
-    }
-          [data-theme="dark"] #theme-toggle {
-    background: #FFFFFF;
-    border-color: #C6922B;
-    color: #C6922B;
-}                                                          
+                                      
         }
 
 
@@ -848,32 +824,29 @@ text-shadow: 0 0 0.5px #1F1F1F;
 #copy-email-mobile {
     font-size: 16px !important;
 }
-    #theme-toggle {
-        top: 8px;
-        right: 8px;
-        bottom: auto;
-        left: auto;
-        width: 42px;
-        height: 42px;
-        background: #141416;
-        border-color: #C6922B;
-        color: #C6922B;
-    }
+  #theme-toggle {
+    top: 8px;
+    right: 8px;
+    bottom: auto;
+    left: auto;
+    width: 42px;
+    height: 42px;
+}
      
 }
    
   /* ── Кнопка переключения темы ─---------------------------------------------------------------------------─ */
 #theme-toggle {
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     z-index: 9999;
     width: 46px;
     height: 46px;
     border: 1px solid var(--accent);
     border-radius: 50%;
-    background: #FFFFFF;
-    color: var(--accent);
+    background: #1F1F1F;
+    color: #D4A43C;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -2726,7 +2699,6 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
 });
 </script>
 
-
 <!-- Кнопка переключения темы -------------------------------------------------------------->
 <button id="theme-toggle" title="Переключить тему">
     <svg id="sun-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2745,30 +2717,29 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     </svg>
 </button>
 
-
- <script>
+<script>
 (function() {
     const toggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     const sun = document.getElementById('sun-icon');
     const moon = document.getElementById('moon-icon');
 
-    // Проверяем сохранённую тему
+    // Проверяем сохранённую тему при загрузке
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
-        html.dataset.theme = 'dark';
+        html.setAttribute('data-theme', 'dark');
         sun.style.display = 'block';
         moon.style.display = 'none';
     }
 
     toggle.addEventListener('click', function() {
-        if (html.dataset.theme === 'dark') {
-            html.dataset.theme = 'light';
+        if (html.getAttribute('data-theme') === 'dark') {
+            html.removeAttribute('data-theme');
             sun.style.display = 'none';
             moon.style.display = 'block';
             localStorage.setItem('theme', 'light');
         } else {
-            html.dataset.theme = 'dark';
+            html.setAttribute('data-theme', 'dark');
             sun.style.display = 'block';
             moon.style.display = 'none';
             localStorage.setItem('theme', 'dark');
@@ -2776,17 +2747,6 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     });
 })();
 </script>
-
-<button id="theme-toggle-1100" style="display:none;">🌓</button>
- 
-<script>
-document.getElementById('theme-toggle-1100').addEventListener('click', function() {
-    document.getElementById('theme-toggle').click();
-});
-</script>
-
-
-
 
 
  
