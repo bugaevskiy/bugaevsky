@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
-            color-scheme: light only;
             --bg: #FFFFFF;
             --text: #1F1F1F;
             --text-secondary: #6B6B6B;
@@ -890,7 +889,6 @@ text-shadow: 0 0 0.5px #1F1F1F;
                                                             
 /* ── Ночная тема ── */
 [data-theme="dark"] {
-    color-scheme: dark only;
     --bg: #0B0B0C;
     --text: #EDEDED;
     --text-secondary: #A0A0A3;
@@ -2773,49 +2771,6 @@ document.getElementById('theme-toggle-1100').addEventListener('click', function(
 </script>
 
 
-<!--Поддержка автоматической темы браузера, с возможностью переключить вручную солнце\луна----->
- 
-<script>
-(function() {
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    const sun = document.getElementById('sun-icon');
-    const moon = document.getElementById('moon-icon');
-
-    // Проверяем сохранённую тему или тему браузера
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        html.dataset.theme = 'dark';
-        sun.style.display = 'block';
-        moon.style.display = 'none';
-    }
-    
-    // Если браузер меняет тему — сайт тоже меняется
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem('theme')) {
-            html.dataset.theme = e.matches ? 'dark' : 'light';
-            sun.style.display = e.matches ? 'block' : 'none';
-            moon.style.display = e.matches ? 'none' : 'block';
-        }
-    });
-
-    toggle.addEventListener('click', function() {
-        if (html.dataset.theme === 'dark') {
-            html.dataset.theme = 'light';
-            sun.style.display = 'none';
-            moon.style.display = 'block';
-            localStorage.setItem('theme', 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            sun.style.display = 'block';
-            moon.style.display = 'none';
-            localStorage.setItem('theme', 'dark');
-        }
-    });
-})();
-</script>
 
 
 
