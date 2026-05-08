@@ -2755,6 +2755,7 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
     };
     
     fetch(url, {method: 'POST', body: JSON.stringify(data), mode: 'cors'}); 
+    gtag('event', 'form_submit');
     document.getElementById('form-overlay').classList.remove('is-open');
     document.getElementById('form-popup').classList.remove('is-open');
     f.reset();
