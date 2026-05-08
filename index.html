@@ -21,7 +21,7 @@
 <meta property="og:type" content="website">
 <!------------------------------------------ КОНЕЦ ОПЕРАЦИИ: МЕТА-ТЕГИ ------------------------------------------------------->
 
-<!------------------------------------- Google Analytics 4 ------------------------------------------------------------------->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-35XRMJZ971"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -29,29 +29,7 @@
   gtag('js', new Date());
   gtag('config', 'G-35XRMJZ971');
 </script>
-
-<!------------------------------------- Отслеживание отправки формы ---------------------------------------------------------->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('form-fields');
-    if (form) {
-      form.addEventListener('submit', function() {
-        if (typeof gtag === 'function') {
-          gtag('event', 'form_submit', {
-            'event_category': 'forms',
-            'event_label': 'Обратная связь'
-          });
-        }
-      });
-    }
-  });
-    !------------------------------------- Google Analytics 4 конец ------------------------------------------------------------------->
-
-</script>
-
-
-
-    
+  
     
     <style>
         :root {
