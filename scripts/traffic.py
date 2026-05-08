@@ -6,19 +6,17 @@
 import requests
 import csv
 import os
-from datetime import date, timedelta
+from datetime import date
 
-# Настройки — замените на свои данные
 USERNAME = "bugaevskiy"
 REPO = "bugaevsky"
-TOKEN = os.environ.get("GH_TOKEN")  # Берём токен из секретов GitHub
+TOKEN = os.environ.get("GH_TOKEN")
 
 headers = {
     "Authorization": f"token {TOKEN}",
     "Accept": "application/vnd.github.v3+json"
 }
 
-# Получаем просмотры за 14 дней (максимум, что даёт GitHub API)
 url_views = f"https://api.github.com/repos/{USERNAME}/{REPO}/traffic/views"
 url_clones = f"https://api.github.com/repos/{USERNAME}/{REPO}/traffic/clones"
 url_paths = f"https://api.github.com/repos/{USERNAME}/{REPO}/traffic/popular/paths"
@@ -60,15 +58,17 @@ report_lines = [
     f"- Уникальных: **{unique_clones}**\n",
 ]
 
-if paths_data:
+# Безопасная обработка popular paths
+if isinstance(paths_data, list) and paths_data:
     report_lines.append("\n## 🔥 Популярные страницы\n")
     for p in paths_data[:5]:
-        report_lines.append(f"- `{p['path']}` — {p['count']} просмотров")
+        report_lines.append(f"- `{p.get('path', '?')}` — {p.get('count', 0)} просмотров")
 
-if referrers_data:
+# Безопасная обработка referrers
+if isinstance(referrers_data, list) and referrers_data:
     report_lines.append("\n## 🔗 Откуда приходят\n")
     for r in referrers_data[:5]:
-        report_lines.append(f"- {r['referrer']} — {r['count']} переходов")
+        report_lines.append(f"- {r.get('referrer', '?')} — {r.get('count', 0)} переходов")
 
 report_lines.append(f"\n\n---\n*Данные собираются автоматически через GitHub Actions. Хранятся в traffic.csv*")
 
