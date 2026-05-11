@@ -71,6 +71,10 @@
             color: var(--text);
             font-family: 'Montserrat', 'Segoe UI', sans-serif;
             -webkit-font-smoothing: antialiased;
+            user-select: none; /* -------------запрет выделения------------------------------ */
+            -webkit-user-select: none;/* ------запрет выделения------------------------------ */
+            -moz-user-select: none;/* ---------запрет выделения------------------------------ */
+            -ms-user-select: none;/* ----------запрет выделения------------------------------ */
         }
 
         .hero {
@@ -197,18 +201,29 @@
 
         .accordion__card {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    border: 1.142px solid var(--accent); /*--------------толще линии обводки слоев----------------------------*/
     border-radius: 12px;
     padding: 20px 20px;
-    cursor: pointer;
-    transition: box-shadow 0.25s ease-out, background-color 0.25s ease-out;
+    cursor: pointer;         
+    transition: box-shadow 0.25s ease-out, background-color 0.25s ease-out, transform 0.15s ease-out;/*---анимация слоев---*/
     display: flex;
     align-items: flex-start;
     gap: 0;
     position: relative;
     width: 100%;
+    -webkit-tap-highlight-color: transparent; /*---синий экран при нажатиии---------------------*/
+    -webkit-touch-callout: none;/*----------синий экран при нажатиии----------------------------*/
 }
-
+a, button, .hero__side-cta, .form-popup__agree-link, .form-popup__submit, .popup__cta, .popup__answer, .popup__nav-btn, .article-card__toggle, .cases__arrow {
+    -webkit-tap-highlight-color: transparent;/*--------------------------синий экран при нажатиии----------------------------*/
+}
+.accordion__card:hover {  /*-----------анимация слоев---------------------*/
+    transform: translateY(-1px);
+}
+.accordion__card--expanded:hover {  /*-----------анимация слоев---------------------*/
+    transform: none;
+}
+       
         .accordion__card--expanded {
             box-shadow: var(--card-shadow-open);
             background: #FFFFFF;
@@ -243,6 +258,7 @@
            font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
            letter-spacing: 0.015em;
         }
+        
 /* Сетка состава */
         .accordion__grid {
             display: none;
@@ -250,7 +266,7 @@
             gap: 0 20px;
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid var(--divider);
+            border-top: 1px solid var(--accent); /* ---------линия бронзы над составом--- */
             font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
             font-size: 16.5px;
             font-weight: 400;
@@ -272,6 +288,10 @@
         .grid-item {
             padding: 7px 0 10px 18px;
             position: relative;
+            -webkit-tap-highlight-color: transparent; /* ------запрет выделения-----------------------*/
+            -webkit-touch-callout: none; /* ----------запрет выделения--------------------------------*/
+            user-select: none; /* -------------------запрет выделения---------------------------------*/
+            -webkit-user-select: none;/* ------------запрет выделения---------------------------------*/
         }
 
         .grid-item::before {
@@ -285,8 +305,8 @@
             background-color: var(--accent);
         }
 
-        /* Линии только в слое 01 под каждым пунктом, кроме последнего */
-        #grid-1 .grid-item:not(:last-child) {
+        /*--------------Линии только в слое 01 под каждым пунктом, кроме последнего-----------------------*/
+         #grid-1 .grid-item:not(:last-child):not(:nth-child(7)) {
             border-bottom: 1px solid var(--divider);
         }
 #grid-1 .grid-item:first-child {
@@ -870,6 +890,9 @@ text-shadow: 0 0 0.5px #1F1F1F;
 #grid-1 .grid-item:first-child,
 #grid-1 .grid-item:nth-child(2) {
     margin-top: 0;
+  }  
+ #grid-1 .grid-item:nth-child(7) { /* ── линия под пунктом 7--------------------─ */
+    border-bottom: 1px solid var(--divider);   
 }
 #grid-2 .grid-item:first-child {
     border-bottom: 1px solid var(--divider);
@@ -885,7 +908,20 @@ text-shadow: 0 0 0.5px #1F1F1F;
     width: 40px !important;
     height: 40px !important;
 }
-     
+   /* ── детализация попап-------------------------------------------------------─ */
+#detail-popup {
+    width: 90vw;
+    max-width: 400px;
+    padding: 28px 20px 24px;
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+}  
 }
    
   /* ── Кнопка переключения темы ─---------------------------------------------------------------------------─ */
@@ -944,6 +980,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] .form-popup {
     background: #141416;
     color: #EDEDED;
+    border: 1px solid var(--accent); /* ------------------ обводка------------------------- */
 }
 [data-theme="dark"] .popup__title,
 [data-theme="dark"] .form-popup__title {
@@ -980,7 +1017,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] .popup__answer.is-selected { border-color: #C6922B; background: #1A1A1D; }
 [data-theme="dark"] .popup__subtitle { color: #A0A0A3; }
 [data-theme="dark"] .popup__skip a { color: #C6922B; }
-[data-theme="dark"] .popup__divider { border-top-color: #2A2A2E; }
+[data-theme="dark"] .popup__divider { border-top-color: #ECEDF0 } /*-----------линия 1 попап--------------------*/
 [data-theme="dark"] .popup__conf { color: #6F6F73; }    
 [data-theme="dark"] .form-popup__input {
     background: #1A1A1D;
@@ -993,21 +1030,32 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] .form-popup__agree {
     color: #A0A0A3;
 }
-
  [data-theme="dark"] .accordion__title {
     color: #EDEDED;
 }
 [data-theme="dark"] .accordion__grid {
     color: #A0A0A3;
-}                                                           
+}   
+ [data-theme="dark"] .grid-item:hover {/*-------игра меню в ночном режиме-------*/
+    color: #EDEDED;
+    text-shadow: 0 0 0.5px #EDEDED;
+}        
 [data-theme="dark"] .privacy__text h3 {
     color: #EDEDED;
 }
 [data-theme="dark"] .privacy__text p {
     color: #A0A0A3;
+     font-size: 15px; /*------------размер --------------------------------------------*/
+     line-height: 1.6;
 }
 [data-theme="dark"] .hero__side-slogan {
     color: #EDEDED;
+} 
+/*-----------------------------------Текст в расшифровке каждого пункта --------------*/
+[data-theme="dark"] #detail-text {
+    color:  #A0A0A3;
+    font-size: 15px;
+    line-height: 1.6;
 }
         
     </style>
