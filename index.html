@@ -1125,13 +1125,12 @@ text-shadow: 0 0 0.5px #1F1F1F;
                                <div class="grid-item">1. Когда заканчиваются деньги.</div>
                                <div class="grid-item">2. Реальная маржа по каждому артикулу.</div>
                                <div class="grid-item">3. Модель денежных потоков в цикле.</div>
-                               <div class="grid-item">4. Где возникает денежный разрыв.</div>
-                               <div class="grid-item">5. Сколько нужно для непрерывной работы.</div>
-                               <div class="grid-item">6. Какие артикулы стоит убрать.</div>
-                               <div class="grid-item">7. Сколько денег реально свободно.</div>
-                               <div class="grid-item">8. Где точки риска в операционном цикле.</div>
-                               <div class="grid-item">9. Какой запас ликвидности необходим.</div>
-                            </div>
+                               <div class="grid-item">4. Сколько нужно для непрерывной работы.</div>
+                               <div class="grid-item">5. Какие артикулы стоит убрать.</div>
+                               <div class="grid-item">6. Сколько денег реально свободно.</div>
+                               <div class="grid-item">7. Где точки риска в операционном цикле.</div>
+                               <div class="grid-item">8. Нужен ли запас ликвидности.</div>
+                              </div>
                           </div>
                         <div class="accordion__icon">+</div>
                     </div>
@@ -1142,7 +1141,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
                             <div class="accordion__title">Управление решениями</div>
                             <div class="accordion__subtitle">Оцениваем риски управленческих решений и формируем штаб</div>
                             <div class="accordion__grid" id="grid-2">
-                                <div class="grid-item">1. Как решения влияют на ликвидность.</div>
+                                <div class="grid-item">1. Влияние решений в рамках цикла.</div>
                                 <div class="grid-item">2. Формирование антикризисной команды.</div>
                             </div>
                         </div>
@@ -1155,7 +1154,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
                             <div class="accordion__title">Управление приоритетами обязательств</div>
                             <div class="accordion__subtitle">Учитываем ограничения доступа к денежным средствам</div>
                             <div class="accordion__grid" id="grid-3">
-                                <div class="grid-item">Риски внешних ограничений доступа к деньгам.</div>
+                                <div class="grid-item">Риски со стороны налоговой и банков.</div>
                             </div>
                         </div>
                         <div class="accordion__icon">+</div>
@@ -1784,6 +1783,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     width: 540px;
     max-width: 90vw;
     background: #FFFFFF;
+    border: 1px solid var(--accent); /* ── обводка----------------------------------------── */
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     z-index: 1001;
@@ -2226,12 +2226,19 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
     width: 440px;
     max-width: 90vw;
     background: #FFFFFF;
+    border: 1px solid var(--accent); /* ------Окантовка--------------------------- */
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     z-index: 2001;
     padding: 36px 36px 28px;
     font-family: 'Montserrat', 'Segoe UI', sans-serif;
 }
+    [data-theme="dark"] .form-popup { /* Окантовка ночь--------------------------- */
+    background: #141416;
+    color: #EDEDED;
+    border: 1px solid var(--accent); /* Окантовка ночь */
+}
+
 .form-popup.is-open { display: block; }
 
 .form-popup__close {
@@ -2253,6 +2260,9 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
     font-weight: 600;
     color: #1F1F1F;
     margin-bottom: 6px;
+}
+#detail-title { /* ---- заголовок расшифровки----- */
+font-size: 18px; 
 }
 .form-popup__subtitle {
     font-size: 14px;
@@ -2668,7 +2678,7 @@ document.querySelectorAll('.article-card__toggle').forEach(btn => {
 }
 .privacy__text h3 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
+    font-size: 15px;<!------------------------------------------------------ размер шрифта----------------->
     font-weight: 600;
     color: #1F1F1F;
     margin-top: 20px;
@@ -2679,10 +2689,15 @@ document.querySelectorAll('.article-card__toggle').forEach(btn => {
 }
 </style>
 
+<!------------------------------------------------------ ── ПОПАП ДЕТАЛИЗАЦИИ ПУНКТОВ ── --------------------------------------->
+<div id="detail-overlay" class="form-overlay" style="z-index:3000;"></div>
 
-
-
-
+<div id="detail-popup" class="form-popup" style="z-index:3001; max-width:600px; max-height:80vh; overflow-y:auto;">
+  <button class="form-popup__close" id="detail-close"></button>
+  <h2 class="form-popup__title" id="detail-title"></h2>
+  <div class="form-popup__divider"></div>
+  <div class="privacy__text" id="detail-text"></div>
+</div>
 
  
 <script>
@@ -2860,6 +2875,95 @@ document.getElementById('form-fields').addEventListener('submit', function(e) {
 </script>
 
 
+<script>
+
+<!-- -------------------------------------Для попап расшифровки 13 пунктов -------------------------------------------------------------->
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Данные для попапа
+  const detailData = {
+    "Когда заканчиваются деньги.": {
+      title: "Когда заканчиваются деньги.",
+      text: "Период, в котором ликвидности станет недостаточно для покрытия обязательств, т.е. момент наступления денежного разрыва."
+    },
+    "Реальная маржа по каждому артикулу.": {
+      title: "Реальная маржа по каждому артикулу.",
+      text: "Сколько каждая позиция приносит на самом деле. Реальная маржинальность и конкретные артикулы, которые работают в минус и создают иллюзию дохода."
+    },
+    "Модель денежных потоков в цикле.": {
+      title: "Модель денежных потоков в цикле.",
+      text: "Модель показывает движение всех денежных потоков, а при ограниченной управляемости затрат детализацию денежного разрыва."
+    },
+    "Сколько нужно для непрерывной работы.": {
+      title: "Сколько нужно для непрерывной работы.",
+      text: "Определяем конкретное место и момент, когда расходы обгоняют поступления. Это не общая нехватка, а разрыв в конкретной точке цикла."
+    },
+    "Какие артикулы стоит убрать.": {
+      title: "Какие артикулы стоит убрать.",
+      text: "Убыточные артикулы, которые замораживают оборотный капитал. Их возможное исключение из матрицы высвобождает ликвидность."
+    },
+    "Сколько денег реально свободно.": {
+      title: "Сколько денег реально свободно.",
+      text: "Объём доступной ликвидности, не ограниченной обязательствами, то есть деньги, которые можно использовать свободно."
+    },
+    "Где точки риска в операционном цикле.": {
+      title: "Где точки риска в операционном цикле.",
+      text: "Критические точки, влияние которых может остановить операционный цикл."
+    },
+    "Нужен ли запас ликвидности.": {
+      title: "Нужен ли запас ликвидности.",
+      text: "Резерв, определяющий период, в течение которого компания способна выполнять обязательства при дефиците ликвидности. Рассчитывается исходя из желания держать деньги вне оборота."
+    },
+    "Влияние решений в рамках цикла.": {
+      title: "Влияние решений в рамках цикла.",
+      text: "Порядок формирования инструментов для защиты от рисков критических ошибок."
+    },
+    "Формирование антикризисной команды.": {
+      title: "Формирование антикризисной команды.",
+      text: "Мобильная группа с фиксированными полномочиями и мотивацией из сотрудников компании, при наличии возможности."
+    },
+    "Риски со стороны налоговой и банков.": {
+      title: "Риски со стороны налоговой и банков.",
+      text: "Вероятность блокировок счетов, принудительного взыскания и прочих угроз."
+    },
+    "Как работать при слабом росте.": {
+      title: "Как работать при слабом росте.",
+      text: "Сценарии работы в фазе восстановления, через сохранение устойчивости и оптимизацию цикла."
+    }
+  };
+
+  const detailOverlay = document.getElementById('detail-overlay');
+  const detailPopup = document.getElementById('detail-popup');
+  const detailTitle = document.getElementById('detail-title');
+  const detailText = document.getElementById('detail-text');
+  const detailClose = document.getElementById('detail-close');
+
+  document.querySelectorAll('.grid-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const key = this.textContent.trim().replace(/^\d+\.\s*/, '');
+
+      const data = detailData[key];
+      if (data) {
+        detailTitle.textContent = data.title;
+        detailText.textContent = data.text;
+        detailOverlay.classList.add('is-open');
+        detailPopup.classList.add('is-open');
+      }
+    });
+  });
+
+  function closeDetail() {
+    detailOverlay.classList.remove('is-open');
+    detailPopup.classList.remove('is-open');
+  }
+
+  detailClose.addEventListener('click', closeDetail);
+  detailOverlay.addEventListener('click', closeDetail);
+});
+</script>
+
+    
  
 </body>
 </html>
