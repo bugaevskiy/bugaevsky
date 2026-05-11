@@ -141,7 +141,15 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
+          .ribbon-icon svg { /*-------------изменение цвета иконок ОБО мне ----------------------------*/
+          transition: opacity 0.2s;
+          }
+          .ribbon-icon:hover svg { /*-------изменение цвета иконок ОБО мне ----------------------------*/
+           opacity: 0.6;
+          }
 
+
+        
         .hero__main {
             display: flex;
             gap: 40px;
@@ -1060,6 +1068,38 @@ text-shadow: 0 0 0.5px #1F1F1F;
     font-size: 15px;
     line-height: 1.6;
 }
+/*-----------------------------------ЧЕРНЫЙ ЭКРАН ПОПАП ОБО МНЕ--------------------------------------------------------------*/        
+[data-theme="dark"] #resume-cta {
+    background-color: #1A1A1D;
+    color: #FFFFFF;
+}
+[data-theme="dark"] #resume-cta:hover {
+    background-color: #2A2A2E;
+}
+[data-theme="dark"] #resume-popup {
+    background: #141416;
+}
+[data-theme="dark"] #resume-popup .form-popup__title {
+    color: #FFFFFF !important;
+}
+[data-theme="dark"] #resume-more-popup {
+    background: #141416;
+}
+[data-theme="dark"] #resume-more-popup .form-popup__title {
+    color: #FFFFFF !important;
+}
+[data-theme="dark"] #resume-popup p {
+    color: #FFFFFF !important;
+}
+[data-theme="dark"] #resume-popup strong {
+    color: #FFFFFF !important;
+}
+[data-theme="dark"] #resume-popup span {
+    color: #A0A0A3;
+}
+[data-theme="dark"] #resume-more-popup .privacy__text p {
+    color: #A0A0A3;
+}
         
     </style>
 </head>
@@ -1196,8 +1236,15 @@ text-shadow: 0 0 0.5px #1F1F1F;
                                                                 
                 <p class="hero__side-slogan"> 
                 <span class="brand-name">©Бугаевский&nbsp;консалтинг</span><br>Архитектура операционной эффективности</p>
-           <p style="font-size:17px;color:#9A9A9A;margin-top:10px;text-align:center;">Дмитрий Бугаевский</p>
-         <!-- Телефон и почта --> 
+           
+ <!-- ИМЯ И ФАМИЛИЯ КЛИКАБЕЛЬНЫЕ-----------------------------------------------------------------------------------------------------------------------------------------------------------> 
+           <p style="font-size:17px;color:#9A9A9A;margin-top:10px;text-align:center;">
+           <span id="resume-trigger" style="cursor:pointer;color:#9A9A9A;">Дмитрий Бугаевский</span>
+           <span style="color: var(--accent); cursor: pointer; font-size: 15px;" id="resume-icon">ⓘ</span>
+            </p>
+        
+               
+<!-- Телефон и почта --> 
         <div style="font-size:15px;color:#9A9A9A;line-height:1.6;margin-top:12px;text-align:center"> 
                         <span id="phone-copy" style="cursor:pointer;color:#9A9A9A;">+7&#160;(931)&#160;708&#160;<span class="phone-digits">33&#160;34</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-left:4px;">
@@ -2165,6 +2212,7 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 
     window.getSelectedAnswers = function() { return selected; };
     window.getQuestions = function() { return questions; };
+    window.goToDiagnostic = function(n) { goTo(n); }; <!-- -----------ПЕРВЫЙ ВОПРОС В ОКНЕ ВЫЗОВА ИЗ РАЗДЕЛА ОБО МНЕ------------------- ── -->
 
 })();
 
@@ -2243,7 +2291,11 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 }
 
 .form-popup.is-open { display: block; }
-
+    
+#resume-popup.is-open { /* -----------ОКНО ПРИ НАЖАТИИ НА ФАМИЛИЮ И ИМЯ----------------------- */
+    display: flex;
+}
+    
 .form-popup__close {
     position: absolute;
     top: 16px;
@@ -2966,6 +3018,136 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- ------------------------------------------------── ПОПАП: ОБО МНЕ ВСЕ НИЖЕ ДО БОДИ ── ----------------------------------------------------------------------->
+<div id="resume-overlay" class="form-overlay" style="z-index:4000;"></div>
+
+<div id="resume-popup" class="form-popup" style="z-index:4001; max-width:800px; width:90vw; max-height:85vh; overflow-y:auto; padding:0; border-radius:16px;">
+  <button class="form-popup__close" id="resume-close" style="position:absolute; top:16px; right:20px; z-index:10;">&times;</button>
+  <!-- Левая колонка -->
+  <div style="flex:1; min-width:280px; padding:36px 28px 28px;">
+    <h2 class="form-popup__title">Обо мне</h2>
+    <div class="form-popup__divider"></div>
+    
+    <p style="font-size:16px; font-weight:500; color:#1F1F1F; line-height:1.5; margin-bottom:20px;">
+      Помогаю собственникам и управленческим командам восстанавливать управляемость бизнеса через ликвидность и денежный цикл.
+    </p>
+
+    <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:24px;">
+      
+      <!-- Пункт 1 -->
+      <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:#3A3D42; line-height:1.5;">
+        <div class="ribbon-icon" style="width:24px; height:24px; flex-shrink:0; margin-top:2px;">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+        </div>
+        <span><strong>15+ лет в коммерческих и операционных процессах</strong><br>Практический опыт в производстве, торговле и e-commerce</span>
+      </div>
+
+      <!-- Пункт 2 -->
+      <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:#3A3D42; line-height:1.5;">
+        <div class="ribbon-icon" style="width:24px; height:24px; flex-shrink:0; margin-top:2px;">
+          <svg viewBox="0 0 24 24"><polyline points="3 18 7 12 11 14 15 6 21 8"/></svg>
+        </div>
+        <span><strong>Денежный поток и ликвидность</strong><br>Работа с обязательствами, оборотным капиталом и кассовыми разрывами</span>
+      </div>
+
+      <!-- Пункт 3 -->
+      <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:#3A3D42; line-height:1.5;">
+        <div class="ribbon-icon" style="width:24px; height:24px; flex-shrink:0; margin-top:2px;">
+          <svg viewBox="0 0 24 24"><path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/></svg>
+        </div>
+        <span><strong>Фокус на компаниях от 100 млн ₽ выручки</strong><br>Масштаб, при котором денежный цикл требует системного управления</span>
+      </div>
+
+      <!-- Пункт 4 -->
+      <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:#3A3D42; line-height:1.5;">
+        <div class="ribbon-icon" style="width:24px; height:24px; flex-shrink:0; margin-top:2px;">
+         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+        </div>
+        <span><strong>Операционный контур управления</strong><br>Дебиторы, поставщики и товарные запасы как единая система</span>
+      </div>
+
+    </div>
+
+    <a href="#" class="hero__side-cta" id="resume-cta" style="display:inline-flex; margin-bottom:12px;">
+      Получить диагностику
+      <span class="hero__side-cta-arrow">→</span>
+    </a>
+    <br>
+    <span id="resume-more" style="color: var(--accent); cursor:pointer; font-size:14px; text-decoration:underline;">Узнать больше →</span>
+  </div>
+
+  <!-- Правая колонка: фото -->
+  <div style="flex:0 0 45%; min-width:250px; background:#f8f8f8; display:flex; align-items:center; justify-content:center; border-radius:0 16px 16px 0; overflow:hidden;">
+  <img src="./Photo.png" alt="Дмитрий Бугаевский" style="width:100%; height:100%; object-fit:contain;">
+  
+</div>
+</div>
+
+<!-- ── ПОПАП: УЗНАТЬ БОЛЬШЕ ── -->
+<div id="resume-more-overlay" class="form-overlay" style="z-index:4002;"></div>
+
+<div id="resume-more-popup" class="form-popup" style="z-index:4003; max-width:600px; max-height:80vh; overflow-y:auto;">
+ <h2 class="form-popup__title">Подробнее</h2>
+  <div class="form-popup__divider"></div>
+  <div class="privacy__text" style="font-size:15px; line-height:1.6;">
+    <p>Более 15 лет управляю коммерческими и операционными процессами в производстве, торговле и e-commerce.</p>
+    <p>Выстраиваю операционную систему бизнеса как единый контур ликвидности через:</p>
+    <p>● эффективность работы с дебиторами;<br>● обязательства перед поставщиками;<br>● рентабельность товарных запасов.</p>
+    <p>Именно в этом контуре формируются ограничения денежного потока и возникают кассовые разрывы.</p>
+    <p>Поэтому системно:</p>
+    <p>● анализирую движение денежных потоков, маржинальность и рентабельность;<br>● помогаю настраивать договорную систему: условия поставок, отсрочки, пересмотр условий контрактов;<br>● внедряю регламенты при дефиците ликвидности;<br>● оптимизирую запасы, ассортимент.</p>
+    <p>Результат — управляемый, предсказуемый и устойчивый денежный поток в реальной логике бизнеса.</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const resumeOverlay = document.getElementById('resume-overlay');
+  const resumePopup = document.getElementById('resume-popup');
+  const resumeClose = document.getElementById('resume-close');
+  const resumeIcon = document.getElementById('resume-icon');
+  const resumeTrigger = document.getElementById('resume-trigger');
+  const resumeMore = document.getElementById('resume-more');
+  const resumeMoreOverlay = document.getElementById('resume-more-overlay');
+  const resumeMorePopup = document.getElementById('resume-more-popup');
+  const resumeCta = document.getElementById('resume-cta');
+
+  function openResume() {
+    resumeOverlay.classList.add('is-open');
+    resumePopup.classList.add('is-open');
+  }
+  function closeResume() {
+    resumeOverlay.classList.remove('is-open');
+    resumePopup.classList.remove('is-open');
+  }
+  function openResumeMore(e) {
+    e.preventDefault();
+    resumeMoreOverlay.classList.add('is-open');
+    resumeMorePopup.classList.add('is-open');
+  }
+  function closeResumeMore() {
+    resumeMoreOverlay.classList.remove('is-open');
+    resumeMorePopup.classList.remove('is-open');
+  }
+
+  resumeIcon.addEventListener('click', openResume);
+  resumeTrigger.addEventListener('click', openResume);
+  resumeClose.addEventListener('click', closeResume);
+  resumeMore.addEventListener('click', openResumeMore);
+  resumeMoreOverlay.addEventListener('click', closeResumeMore);
+
+// CTA — открывает попап диагностики
+resumeCta.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeResume();
+    document.getElementById('popup-overlay').classList.add('is-open');
+    document.getElementById('popup').classList.add('is-open');
+    if (window.goToDiagnostic) window.goToDiagnostic(0);
+});
+});
+
+</script>
+    
     
  
 </body>
