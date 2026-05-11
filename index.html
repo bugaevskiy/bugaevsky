@@ -933,13 +933,22 @@ text-shadow: 0 0 0.5px #1F1F1F;
  #privacy-popup {
     max-height: 10vh;
 }   
-  #resume-popup > div:last-child {
-    display: none;
+#resume-popup > div:last-child {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
 }
 #resume-popup > div:first-child {
-    flex: 1 0 100%;
-    min-width: 100%;
-}                                                             
+    flex: 1 0 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+#resume-close {
+    left: 16px !important;
+    right: auto !important;
+}                                                          
 }
    
   /* ── Кнопка переключения темы ─---------------------------------------------------------------------------─ */
