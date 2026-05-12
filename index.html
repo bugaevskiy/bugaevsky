@@ -939,12 +939,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
     max-height: 75vh !important;
     overflow-y: auto !important;
   }  
-     #resume-more-popup {
-    width: 90vw !important;
-    max-width: 440px !important;
-    max-height: 75vh !important;
-    overflow-y: auto !important;
-}                                                          
+                                                      
 #resume-popup > div:last-child {
     display: none !important;
     visibility: hidden !important;
@@ -966,10 +961,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 #resume-popup .form-popup__title {
     text-align: center !important;
 }
-#resume-more {
-    display: block !important;
-    margin-bottom: 24px !important;
-}
+
                                                                
 }
    
@@ -1120,12 +1112,6 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] #resume-popup .form-popup__title {
     color: #FFFFFF !important;
 }
-[data-theme="dark"] #resume-more-popup {
-    background: #141416;
-}
-[data-theme="dark"] #resume-more-popup .form-popup__title {
-    color: #FFFFFF !important;
-}
 [data-theme="dark"] #resume-popup p {
     color: #FFFFFF !important;
 }
@@ -1135,9 +1121,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] #resume-popup span {
     color: #A0A0A3;
 }
-[data-theme="dark"] #resume-more-popup .privacy__text p {
-    color: #A0A0A3;
-}
+
         
     </style>
 </head>
@@ -3059,12 +3043,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
-
-
-
-
     
 <!-- ------------------------------------------------── ПОПАП: ОБО МНЕ ВСЕ НИЖЕ ДО БОДИ ── ----------------------------------------------------------------------->
 <div id="resume-overlay" class="form-overlay" style="z-index:4000;"></div>
@@ -3124,8 +3102,7 @@ document.addEventListener('DOMContentLoaded', function() {
       Получить диагностику
       <span class="hero__side-cta-arrow">→</span>
     </a>
-    <br>
-    <span id="resume-more" style="color: var(--accent); cursor:pointer; font-size:18px; text-decoration:underline;">Узнать больше →</span>
+    
   </div>
 
 <!-- Правая колонка: фото -->
@@ -3134,23 +3111,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
     
-<!-- ── ПОПАП: УЗНАТЬ БОЛЬШЕ ── -->
-<div id="resume-more-overlay" class="form-overlay" style="z-index:4002;"></div>
-
-<div id="resume-more-popup" class="form-popup" style="z-index:4003; max-width:600px; max-height:80vh; overflow-y:auto;">
- <h2 class="form-popup__title">Подробнее</h2>
-  <div class="form-popup__divider"></div>
-  <div class="privacy__text" style="font-size:15px; line-height:1.6;">
-    <p>Более 15 лет управляю коммерческими и операционными процессами в производстве, торговле и e-commerce.</p>
-    <p>Выстраиваю операционную систему бизнеса как единый контур ликвидности через:</p>
-    <p>● эффективность работы с дебиторами;<br>● обязательства перед поставщиками;<br>● рентабельность товарных запасов.</p>
-    <p>Именно в этом контуре формируются ограничения денежного потока и возникают кассовые разрывы.</p>
-    <p>Поэтому системно:</p>
-    <p>● анализирую движение денежных потоков, маржинальность и рентабельность;<br>● помогаю настраивать договорную систему: условия поставок, отсрочки, пересмотр условий контрактов;<br>● внедряю регламенты при дефиците ликвидности;<br>● оптимизирую запасы, ассортимент.</p>
-    <p>Результат — управляемый, предсказуемый и устойчивый денежный поток в реальной логике бизнеса.</p>
-  </div>
-</div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const resumeOverlay = document.getElementById('resume-overlay');
@@ -3158,9 +3118,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const resumeClose = document.getElementById('resume-close');
   const resumeIcon = document.getElementById('resume-icon');
   const resumeTrigger = document.getElementById('resume-trigger');
-  const resumeMore = document.getElementById('resume-more');
-  const resumeMoreOverlay = document.getElementById('resume-more-overlay');
-  const resumeMorePopup = document.getElementById('resume-more-popup');
   const resumeCta = document.getElementById('resume-cta');
 
   function openResume() {
@@ -3171,16 +3128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resumeOverlay.classList.remove('is-open');
     resumePopup.classList.remove('is-open');
   }
-  function openResumeMore(e) {
-    e.preventDefault();
-    resumeMoreOverlay.classList.add('is-open');
-    resumeMorePopup.classList.add('is-open');
-  }
-  function closeResumeMore() {
-    resumeMoreOverlay.classList.remove('is-open');
-    resumeMorePopup.classList.remove('is-open');
-  }
-
+  
   resumeIcon.addEventListener('click', openResume);
   resumeTrigger.addEventListener('click', openResume);
     const resumeTriggerMobile = document.getElementById('resume-trigger-mobile');
@@ -3188,9 +3136,7 @@ if (resumeTriggerMobile) {
     resumeTriggerMobile.addEventListener('click', openResume);
 }
   resumeClose.addEventListener('click', closeResume);
-  resumeMore.addEventListener('click', openResumeMore);
-  resumeMoreOverlay.addEventListener('click', closeResumeMore);
-
+  
 // CTA — открывает попап диагностики
 resumeCta.addEventListener('click', function(e) {
     e.preventDefault();
