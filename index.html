@@ -950,22 +950,20 @@ text-shadow: 0 0 0.5px #1F1F1F;
                                                                
 
 
-
 #resume-popup {
     width: 90vw !important;
     max-width: 440px !important;
     max-height: 75vh !important;
     overflow-y: auto !important;
 
-    display: none !important;
-    
+    display: none;
+}
+
+#resume-popup.is-open {
+    display: flex !important;
     flex-direction: column;
     align-items: stretch;
 }
-#resume-popup.is-open {
-    display: flex !important;
-}
-
                                                                
 /* мобильная шапка */
 #resume-popup .resume-mobile-photo {
@@ -997,10 +995,9 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
 /* close button */
 #resume-close {
-    position: fixed !important;
-    top: 36px !important;
-    right: calc(50% - 220px + 16px) !important;
-    z-index: 9999 !important;
+   position: absolute;
+    top: 16px;
+    right: 16px;
 }
 
 #resume-popup .form-popup__title {
