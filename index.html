@@ -951,18 +951,13 @@ text-shadow: 0 0 0.5px #1F1F1F;
     top: 10vh;
     left: 50%;
     transform: translateX(-50%);
-
     width: 90vw !important;
     max-width: 440px !important;
     max-height: 75vh !important;
-
     display: none; /* ВАЖНО: закрыто по умолчанию */
-
     flex-direction: column;
-
     background: #fff;
     z-index: 4001;
-
     overflow-y: auto !important;
 }
 
@@ -976,7 +971,6 @@ text-shadow: 0 0 0.5px #1F1F1F;
     top: 16px !important;
     margin-left: auto;
     align-self: flex-end;
-
     z-index: 10000 !important;
     background: #fff;
 }
@@ -997,25 +991,41 @@ text-shadow: 0 0 0.5px #1F1F1F;
     width: 100%;
     height: 220px;
     object-fit: cover;
-
     margin: 0 !important;
     padding: 0 !important;
     border: 0;
-}
-
-
-                                                               
+}                                                              
 /* ТЕКСТ */
 #resume-popup > div:first-child {
     order: 1;
     padding: 36px 20px 28px !important;
 }
-
 /* ТЕКСТ ВНУТРИ СКРОЛЛА */
 #resume-popup > div:first-child {
     overflow: visible;
 }
 
+
+
+
+
+
+                                                               
+
+#resume-popup {
+    line-height: 0 !important;
+}
+#resume-popup .resume-mobile-photo {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+#resume-popup > div:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+#resume-popup img {
+    display: block !important;
+}                                                               
 
 
 
