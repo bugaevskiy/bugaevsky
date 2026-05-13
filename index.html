@@ -942,69 +942,71 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
 
 
-
-
-
-
-
-                                                               
-
-
 #resume-popup {
+    position: fixed !important;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+
     width: 90vw !important;
     max-width: 440px !important;
-    max-height: 75vh !important;
+    max-height: 20vh !important;
+
+    display: none; /* ВАЖНО: закрыто по умолчанию */
+
+    flex-direction: column;
+
+    background: #fff;
+    z-index: 4001;
+
     overflow-y: auto !important;
-    display: none;
 }
+
+
+
 
 #resume-popup.is-open {
     display: flex !important;
-    flex-direction: column;
-    align-items: stretch;
-}
-                                                               
-/* мобильная шапка */
-#resume-popup .resume-mobile-photo {
-    display: block !important;
-    width: 100% !important;
-    order: -1;
-    margin: 0 !important;
-    padding: 0 !important;
 }
 
-#resume-popup .resume-mobile-photo img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
+/* КРЕСТИК (фиксируется внутри popup, но НЕ скроллится отдельно) */
+#resume-close {
+    position: sticky !important;
+    top: 16px !important;
+    margin-left: auto;
+    align-self: flex-end;
+
+    z-index: 10000 !important;
+    background: #fff;
 }
 
-/* скрываем десктоп-колонку */
+/* УБИРАЕМ ДЕСКТОП КОЛОНКУ */
 #resume-popup > div:last-child {
     display: none !important;
 }
 
-/* левая колонка без ломания layout */
+/* МОБИЛЬНОЕ ФОТО */
+#resume-popup .resume-mobile-photo {
+    display: block !important;
+    width: 100% !important;
+    order: 0;
+}
+
+/* ТЕКСТ */
 #resume-popup > div:first-child {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
+    order: 1;
     padding: 36px 20px 28px !important;
 }
 
-/* close button */
-#resume-close {
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 9999 !important;
-}
-
-#resume-popup .form-popup__title {
-    text-align: center !important;
+/* ТЕКСТ ВНУТРИ СКРОЛЛА */
+#resume-popup > div:first-child {
+    overflow: visible;
 }
 
 
 
+
+                                                               
 
 
                                                                
