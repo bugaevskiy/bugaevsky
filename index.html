@@ -953,11 +953,12 @@ text-shadow: 0 0 0.5px #1F1F1F;
     transform: translateX(-50%);
     width: 90vw !important;
     max-width: 440px !important;
-    max-height: 75vh !important;
+    max-height: 80vh !important;
     display: none; /* ВАЖНО: закрыто по умолчанию */
     flex-direction: column;
     z-index: 4001;
     overflow-y: auto !important;
+    padding: 0 !important; /* Убираем возможные внутренние отступы */
 }
 
 #resume-popup.is-open {
@@ -983,6 +984,8 @@ text-shadow: 0 0 0.5px #1F1F1F;
     display: block !important;
     width: 100% !important;
     order: 0;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 #resume-popup .resume-mobile-photo img {
     display: block;
