@@ -945,33 +945,35 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
 
                                                                
-
 #resume-popup {
     position: fixed !important;
-    top: 10vh;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+
     width: 90vw !important;
     max-width: 440px !important;
     max-height: 75vh !important;
-    display: none; /* ВАЖНО: закрыто по умолчанию */
+
+    display: flex;
     flex-direction: column;
-    background: #fff;
+
     z-index: 4001;
-    overflow-y: auto !important;
+
+    overflow-y: auto !important; /* СКРОЛЛ НА ВСЁМ */
 }
+
 
 #resume-popup.is-open {
     display: flex !important;
 }
 
-/* КРЕСТИК (фиксируется внутри popup, но НЕ скроллится отдельно) */
 #resume-close {
-    position: absolute !important;
-    top: 20px !important;
-    right: 20px !important;
+    position: fixed !important;
+    top: calc(50% - 37.5vh + 16px);
+    left: calc(50% + 220px - 36px);
+
     z-index: 10000 !important;
-    margin: 0 !important;
 }
 
 /* УБИРАЕМ ДЕСКТОП КОЛОНКУ */
