@@ -76,7 +76,10 @@
             -moz-user-select: none;/* ---------запрет выделения------------------------------ */
             -ms-user-select: none;/* ----------запрет выделения------------------------------ */
         }
-
+ <! -----------------------------------------------------------НОВЫЙ БЛОК ЗАПЕТ ФОТО В 1080 для  1100----------------------------------------------------- >
+    .resume-mobile-photo {
+    display: none !important;
+        }
         .hero {
             max-width: 1200px;
             margin: 0 auto;
@@ -660,7 +663,10 @@ text-shadow: 0 0 0.5px #1F1F1F;
     width: 46px;
     height: 46px;
 } 
-
+/!-----------------------------------------------НОВЫЙ БЛОК----------------------------------------------------------------------/
+.resume-mobile-photo {
+    display: none !important;
+}
                                       
         }
 
@@ -3051,7 +3057,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="resume-popup" class="form-popup" style="z-index:4001; max-width:1150px; width:90vw; padding:0; border-radius:16px;">
   <button class="form-popup__close" id="resume-close" style="position:absolute; top:16px; right:20px; z-index:10;">&times;</button>
   
-    
+ 
+<!---------------------------------- ФОТО ДЛЯ МОБИЛЬНОЙ ВЕСИИ 1080------------------------------------------------------------------------------------------------------------------------ -->
+<div class="resume-mobile-photo" style="display:none;">
+    <img src="Image_mobil.png" alt="Дмитрий Бугаевский"
+         draggable="false"
+         style="width:320px; height:320px; object-fit:cover; user-select:none; -webkit-user-drag:none;">
+</div>   
     
     <!-- Левая колонка -->
   <div style="flex:0 0 40%; padding:36px 28px 28px; display:flex; flex-direction:column; align-items:center;">
