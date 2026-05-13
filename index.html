@@ -3197,32 +3197,35 @@ document.addEventListener('DOMContentLoaded', function() {
   const resumeCta = document.getElementById('resume-cta');
 
   function openResume() {
-    resumeOverlay.classList.add('is-open');
-    resumePopup.classList.add('is-open');
+    if (resumeOverlay) resumeOverlay.classList.add('is-open');
+    if (resumePopup) resumePopup.classList.add('is-open');
   }
-  function closeResume() {
-    resumeOverlay.classList.remove('is-open');
-    resumePopup.classList.remove('is-open');
-  }
-  
-  resumeIcon.addEventListener('click', openResume);
-  resumeTrigger.addEventListener('click', openResume);
-    const resumeTriggerMobile = document.getElementById('resume-trigger-mobile');
-if (resumeTriggerMobile) {
-    resumeTriggerMobile.addEventListener('click', openResume);
-}
-  resumeClose.addEventListener('click', closeResume);
-  
-// CTA — открывает попап диагностики
-resumeCta.addEventListener('click', function(e) {
-    e.preventDefault();
-    closeResume();
-    document.getElementById('popup-overlay').classList.add('is-open');
-    document.getElementById('popup').classList.add('is-open');
-    if (window.goToDiagnostic) window.goToDiagnostic(0);
-});
-});
 
+  function closeResume() {
+    if (resumeOverlay) resumeOverlay.classList.remove('is-open');
+    if (resumePopup) resumePopup.classList.remove('is-open');
+  }
+
+  if (resumeIcon) resumeIcon.addEventListener('click', openResume);
+  if (resumeTrigger) resumeTrigger.addEventListener('click', openResume);
+
+  const resumeTriggerMobile = document.getElementById('resume-trigger-mobile');
+  if (resumeTriggerMobile) {
+    resumeTriggerMobile.addEventListener('click', openResume);
+  }
+
+  if (resumeClose) resumeClose.addEventListener('click', closeResume);
+
+  if (resumeCta) {
+    resumeCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeResume();
+      document.getElementById('popup-overlay').classList.add('is-open');
+      document.getElementById('popup').classList.add('is-open');
+      if (window.goToDiagnostic) window.goToDiagnostic(0);
+    });
+  }
+});
 </script>
     
     
