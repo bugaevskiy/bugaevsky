@@ -948,57 +948,58 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
 
                                                                
-  #resume-popup {
+
+
+
+#resume-popup {
     width: 90vw !important;
     max-width: 440px !important;
     max-height: 75vh !important;
     overflow-y: auto !important;
-  }  
-                                                      
-#resume-popup > div:last-child {
-    display: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-}
-#resume-popup > div:first-child {
-    flex: 1 0 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    padding: 36px 20px 28px !important;
-} 
-#resume-close {
-    left: auto !important;
-    right: 16px !important;
-    top: 16px !important;
-}          
 
-#resume-popup .form-popup__title {
-    text-align: center !important;
-}
-                                                               
-#resume-popup {
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
 }
 
+/* мобильная шапка */
 #resume-popup .resume-mobile-photo {
+    display: block !important;
     width: 100% !important;
+    order: -1;
     margin: 0 !important;
     padding: 0 !important;
 }
 
 #resume-popup .resume-mobile-photo img {
-    width: 100% !important;
-    height: 220px !important;
-    object-fit: cover !important;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
     display: block;
 }
 
+/* скрываем десктоп-колонку */
+#resume-popup > div:last-child {
+    display: none !important;
+}
 
+/* левая колонка без ломания layout */
+#resume-popup > div:first-child {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding: 36px 20px 28px !important;
+}
 
+/* close button */
+#resume-close {
+    left: auto !important;
+    right: 16px !important;
+    top: 16px !important;
+}
+
+#resume-popup .form-popup__title {
+    text-align: center !important;
+}
 
 
 
