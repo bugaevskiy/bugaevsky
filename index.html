@@ -950,16 +950,12 @@ text-shadow: 0 0 0.5px #1F1F1F;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     width: 90vw !important;
     max-width: 440px !important;
     max-height: 75vh !important;
-
     display: flex;
     flex-direction: column;
-
     z-index: 4001;
-
     overflow-y: auto !important; /* СКРОЛЛ НА ВСЁМ */
 }
 
@@ -969,11 +965,11 @@ text-shadow: 0 0 0.5px #1F1F1F;
 }
 
 #resume-close {
-    position: fixed !important;
-    top: calc(50% - 37.5vh + 16px);
-    left: calc(50% + 220px - 36px);
-
-    z-index: 10000 !important;
+position: absolute !important;
+top: 20px !important;
+right: 20px !important;
+z-index: 10000 !important;
+margin: 0 !important;
 }
 
 /* УБИРАЕМ ДЕСКТОП КОЛОНКУ */
@@ -990,9 +986,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
     padding: 0 !important;
     line-height: 0;
     font-size: 0;
-}
-
-                                                               
+}                                                             
 #resume-popup .resume-mobile-photo img {
     display: block !important;
     width: 100%;
