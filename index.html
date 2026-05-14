@@ -76,7 +76,12 @@
             -moz-user-select: none;/* ---------запрет выделения------------------------------ */
             -ms-user-select: none;/* ----------запрет выделения------------------------------ */
         }
- <! -----------------------------------------------------------НОВЫЙ БЛОК ЗАПЕТ ФОТО В 1080 для  1100----------------------------------------------------- >
+        /*-------------------------------------------- СТИЛИ ДЛЯ ПОРЯДКА CTA В ФУТЕРЕ ----------------------------------------------------------------------------*/
+        .popup__footer {
+    display: flex !important;
+    flex-direction: column !important;
+}
+ /*-----------------------------------------------------------НОВЫЙ БЛОК ЗАПЕТ ФОТО В 1080 для  1100-----------------------------------------------------*/
     .resume-mobile-photo {
     display: none !important;
         }
@@ -1880,17 +1885,17 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
 
     <!-- Нижняя часть -->
     <div class="popup__footer">
-        <div class="popup__footer-left">
+    <button class="popup__cta" id="popup-cta">
+            Оставьте ваши данные
+            <span class="popup__cta-arrow">&rarr;</span>
+        </button>
+          <div class="popup__footer-left">
             <div class="popup__shield">
                 <svg viewBox="0 0 24 24"><path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/></svg>
             </div>
             <span class="popup__conf">Ваши ответы конфиденциальны и используются только для анализа.</span>
         </div>
-        <button class="popup__cta" id="popup-cta">
-            Оставьте ваши данные
-            <span class="popup__cta-arrow">&rarr;</span>
-        </button>
-    </div>
+     </div>
 </div>
 
 <style>
