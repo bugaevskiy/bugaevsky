@@ -227,11 +227,27 @@
     gap: 0;
     position: relative;
     width: 100%;
-    -webkit-tap-highlight-color: transparent; /*---синий экран при нажатиии---------------------*/
-    -webkit-touch-callout: none;/*----------синий экран при нажатиии----------------------------*/
-}
-a, button, .hero__side-cta, .form-popup__agree-link, .form-popup__submit, .popup__cta, .popup__answer, .popup__nav-btn, .article-card__toggle, .cases__arrow {
-    -webkit-tap-highlight-color: transparent;/*--------------------------синий экран при нажатиии----------------------------*/
+  }
+/*--------------------------Убираем синий экран и обводку при нажатии----------------------------*/
+a, button,
+.hero__side-cta,
+.form-popup__agree-link,
+.form-popup__submit,
+.popup__cta,
+.popup__answer,
+.popup__nav-btn,
+.article-card__toggle,
+.cases__arrow,
+.hero__mobile-name,
+#resume-trigger-mobile,
+.accordion__card,
+input,
+input:focus,
+input:active,
+.form-popup__agree input {
+    -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+    box-shadow: none !important;
 }
 .accordion__card:hover {  /*-----------анимация слоев---------------------*/
     transform: translateY(-1px);
