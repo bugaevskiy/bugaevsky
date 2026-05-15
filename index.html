@@ -2546,7 +2546,7 @@ font-size: 18px;
     color: #D4A43C;
     text-decoration: underline;
 }
- 
+
 /*--------------------------Убираем синий блик с ссылки согласия--------------------------*/
 .form-popup__agree-link {
     -webkit-tap-highlight-color: transparent;
@@ -2556,15 +2556,17 @@ font-size: 18px;
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
+    background: transparent !important;
+    -webkit-appearance: none;
+    -webkit-user-modify: read-only;
 }
 
 .form-popup__agree-link:focus,
 .form-popup__agree-link:active {
     outline: none;
     -webkit-tap-highlight-color: transparent;
-}   
+}
 /*--------------------------Убираем синий блик с ссылки согласия--------------------------*/
-
 
     
 .form-popup__note {
