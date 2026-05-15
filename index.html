@@ -2398,12 +2398,18 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
         <input type="tel" class="form-popup__input" placeholder="Телефон" name="phone" required pattern="[+]?[0-9]{10,12}" title="Введите номер телефона цифрами, можно с + в начале">
         <input type="email" class="form-popup__input" placeholder="Email (по желанию)" name="email">
         <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" name="comment" maxlength="300" rows="3"></textarea>
-        <label class="form-popup__agree">
-    <input type="checkbox" required>       
-           <span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link">на обработку персональных данных.</a></span>
-       </label>
+       
+       <!-- <label class="form-popup__agree"> -->
+           <!-- <input type="checkbox" required>   -->    
+           <!-- <span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link">на обработку персональных данных.</a></span> -->
+       <!-- </label> -->
+        
+<label class="form-popup__agree">
+    <input type="checkbox" required>
+    <span>Я подтверждаю согласие <span class="form-popup__agree-link" style="color: var(--accent); text-decoration: underline; cursor: pointer;">на обработку персональных данных.</span></span>
+</label>
 
-
+        
         <button type="submit" class="form-popup__submit">
             Отправить
             <span>&rarr;</span>
