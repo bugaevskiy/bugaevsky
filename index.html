@@ -1829,7 +1829,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
 }
  
 </style>
-
+    
     <script>
         const accordionEl = document.getElementById('accordion');
         const cards = document.querySelectorAll('.accordion__card');
@@ -3308,8 +3308,14 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-    
-    
+
+<script>
+// Блокировка контекстного меню (правая кнопка мыши + долгое нажатие на мобильных)
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+</script>    
  
 </body>
 </html>
