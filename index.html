@@ -287,7 +287,15 @@ input:active,
     outline: none !important;
     box-shadow: none !important;
 }   
-     
+/*--------------------------Убираем выделение текста при тапе----------------------------*/
+.form-popup__agree,
+.form-popup__agree *,
+.form-popup__agree-link,
+.form-popup__agree span {
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
 /*--------------------------Убираем синий экран------------------------------------------------------------*/
 
 
@@ -2392,9 +2400,8 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
         <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" name="comment" maxlength="300" rows="3"></textarea>
         <label class="form-popup__agree">
     <input type="checkbox" required>       
-<!--<span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link">на обработку персональных данных.</a></span>-->
-<span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link" onclick="this.blur();">на обработку персональных данных.</a></span>
-        </label>
+           <span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link">на обработку персональных данных.</a></span>
+       </label>
 
 
         <button type="submit" class="form-popup__submit">
