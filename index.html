@@ -2049,11 +2049,6 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
 .popup__skip a:hover {
     opacity: 0.7;
 }
-
-
-
-
-
 .popup__header-right {
     display: flex;
     flex-direction: column;
@@ -2248,6 +2243,13 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     transition: background-color 0.2s, transform 0.15s;
     justify-content: center;
 }
+/* ──--------------------------- Фиксация длины CTA-------------------------------------------------── */
+.popup__cta,
+.form-popup__submit,
+.hero__side-cta {
+    width: 240px;
+    box-sizing: border-box;
+}  
 .popup__cta:hover {
     background-color: #3A3A3A;
     transform: translateY(-1px);
