@@ -2274,7 +2274,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     }
     .popup__footer {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         gap: 12px;
     }
 }
@@ -2428,6 +2428,7 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 }
 .form-overlay.is-open { display: block; }
 
+
 .form-popup {
     display: none;
     position: fixed;
@@ -2509,12 +2510,18 @@ font-size: 18px;
 .form-popup__input::placeholder {
     color: #9A9A9A;
 }
+    /* ------CTA-------------------------------------------------- */   
+#form-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .form-popup__submit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 100%;
+    width: 240px;
     background-color: #2F2F2F;
     color: #FFFFFF;
     font-family: 'Montserrat', sans-serif;
