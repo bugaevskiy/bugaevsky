@@ -917,12 +917,23 @@ text-shadow: 0 0 0.5px #1F1F1F;
         max-width: 100% !important;
         width: 100%;
     }
+.hero__litera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    height: 230px;
+    margin-bottom: 8px;
+}
 
+.hero__litera-img {
+    width: 180px;
+    height: 220px;
+    object-fit: fill;
+    margin-top: -5px;
+}                                                            
 
-
-                                                               
-
-                                                               
+                                                             
 .cases__cta-wrap {
     display: block;
 }
@@ -1427,7 +1438,20 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
                                                             <div class="hero__mobile-cta">
 
-                                                           
+    <!-- ========== ЛИТЕРА ========== -->
+    <div class="hero__litera" 
+         style="pointer-events: none; user-select: none; -webkit-user-select: none; display: flex; justify-content: center;"
+         oncontextmenu="return false;"
+         onmousedown="return false;"
+         ondragstart="return false;">
+         <img src="literabronzelightcopyright.png" 
+             class="hero__litera-img" 
+             alt="Логотип © Бугаевский консалтинг"
+             draggable="false"
+             style="pointer-events: none; user-select: none; -webkit-user-select: none; width: 180px; height: 220px; object-fit: fill;">
+    </div>
+    <!-- ========== КОНЕЦ ЛИТЕРЫ ========== -->                                                           
+                                                         
     <p class="hero__mobile-brand">©Бугаевский консалтинг</p>
     <p class="hero__mobile-slogan">Архитектура операционной эффективности</p>
                                                                 
