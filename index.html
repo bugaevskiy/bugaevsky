@@ -286,8 +286,28 @@ input:active,
     -webkit-tap-highlight-color: transparent !important;
     outline: none !important;
     box-shadow: none !important;
-}       
-/*--------------------------Убираем синий экран с почты и согласия----------------------------*/
+}   
+/*--------------------------Добивка синего блика в попапе (чекбокс + ссылка)----------------------------*/
+.form-popup__agree input[type="checkbox"],
+.form-popup__agree input[type="checkbox"]:active,
+.form-popup__agree input[type="checkbox"]:focus,
+.form-popup__agree input[type="checkbox"]:focus-visible,
+.form-popup__agree-link,
+.form-popup__agree-link:active,
+.form-popup__agree-link:focus,
+.form-popup__agree-link:focus-visible,
+.form-popup__agree span,
+.form-popup__agree span:active,
+.form-popup__agree label,
+.form-popup__agree label:active {
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -webkit-focus-ring-color: transparent !important;
+    background: transparent !important;
+}      
+/*--------------------------Убираем синий экран------------------------------------------------------------*/
 
 
         
