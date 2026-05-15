@@ -2399,16 +2399,11 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
         <input type="email" class="form-popup__input" placeholder="Email (по желанию)" name="email">
         <textarea class="form-popup__input form-popup__textarea" placeholder="Ваш комментарий (по желанию)" name="comment" maxlength="300" rows="3"></textarea>
        
-       <!-- <label class="form-popup__agree"> -->
-           <!-- <input type="checkbox" required>   -->    
-           <!-- <span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link">на обработку персональных данных.</a></span> -->
-       <!-- </label> -->
-        
-<label class="form-popup__agree">
-    <input type="checkbox" required>
-    <span>Я подтверждаю согласие <span class="form-popup__agree-link" style="color: var(--accent); text-decoration: underline; cursor: pointer;">на обработку персональных данных.</span></span>
-</label>
-
+       <label class="form-popup__agree">
+           <input type="checkbox" required>
+           <span>Я подтверждаю согласие <span class="form-popup__agree-link">на обработку персональных данных.</span></span>
+       <!--<span>Я подтверждаю согласие <a href="#" class="form-popup__agree-link">на обработку персональных данных.</a></span> -->
+       </label> 
         
         <button type="submit" class="form-popup__submit">
             Отправить
@@ -2459,7 +2454,7 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 #resume-popup.is-open { /* -----------ОКНО ПРИ НАЖАТИИ НА ФАМИЛИЮ И ИМЯ----------------------- */
     display: flex;
 }
-    
+  
 .form-popup__close {
     position: absolute;
     top: 8px; /*--------------------------------------------НОВЫЙ ПАРАМЕТР-------------------------------------------------------------------------*/
@@ -2476,7 +2471,6 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
     line-height: 1;
 }
 .form-popup__close:hover { opacity: 0.6; }
-
 .form-popup__title {
     font-size: 22px;
     font-weight: 600;
@@ -2536,9 +2530,6 @@ font-size: 18px;
     background-color: #3A3A3A;
     transform: translateY(-1px);
 }
-
-
-
 .form-popup__agree {
     display: flex;
     align-items: flex-start;
@@ -2556,6 +2547,24 @@ font-size: 18px;
     color: #D4A43C;
     text-decoration: underline;
 }
+ 
+/*--------------------------Убираем синий блик с ссылки согласия--------------------------*/
+.form-popup__agree-link {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+.form-popup__agree-link:focus,
+.form-popup__agree-link:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}   
+/*--------------------------Убираем синий блик с ссылки согласия--------------------------*/
+
+
+    
 .form-popup__note {
     font-size: 16px;
     color: #9A9A9A;
