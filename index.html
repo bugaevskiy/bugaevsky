@@ -3400,30 +3400,6 @@ document.addEventListener('contextmenu', function(e) {
 </script>
 
 
-<!-- ── ================================ЗАПРЕТ СКРОЛЛА ПРИ ЗАТЕМНЕНИИ=============================================== ── -->
-<script>
-(function() {
-    const blockedSelectors = [
-        '.popup-overlay.is-open',
-        '.form-overlay.is-open',
-        '#detail-overlay.is-open',
-        '#success-popup.is-open'
-    ];
-
-    function checkScroll() {
-        const isBlocked = blockedSelectors.some(sel => {
-            const el = document.querySelector(sel);
-            return el && el.offsetParent !== null;
-        });
-        document.body.style.overflow = isBlocked ? 'hidden' : '';
-    }
-
-    const observer = new MutationObserver(checkScroll);
-    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
-    checkScroll();
-})();
-</script>
-
     
 </body>
 </html>
