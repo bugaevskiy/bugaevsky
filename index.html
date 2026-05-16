@@ -1269,6 +1269,17 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] .popup-overlay {/*НОВЫЙ ПАРАМЕТР8*****************************************************************/
     background: rgba(0, 0, 0, 0.85);
 }
+
+
+/*-----------------------------------ЗАПРЕТ СКРОЛА КРАНА ПРИ ОТКРЫТОМ ПОПАП--------------------------------------------------------------------*/    
+body.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+     
+
+
         
     </style>
 </head>
@@ -3197,6 +3208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         detailText.textContent = data.text;
         detailOverlay.classList.add('is-open');
         detailPopup.classList.add('is-open');
+          document.body.style.overflow = 'hidden'; // ← добавил============================================================================================
       }
     });
   });
@@ -3204,7 +3216,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function closeDetail() {
     detailOverlay.classList.remove('is-open');
     detailPopup.classList.remove('is-open');
-  }
+    document.body.style.overflow = ''; // ← добавил========================================================================================================================
+    }
 
   detailClose.addEventListener('click', closeDetail);
   detailOverlay.addEventListener('click', closeDetail);
@@ -3387,6 +3400,19 @@ document.addEventListener('contextmenu', function(e) {
 })();
 </script>
 
+
+<!-- ── ================================ЗАПРЕТ СКРОЛЛА ПРИ ЗАТЕМНЕНИИ=============================================== ── -->
+<script>
+document.addEventListener('click', function(e) {
+    // Проверяем все варианты открытых оверлеев
+    const overlay = document.querySelector('.popup-overlay.is-open, .form-overlay.is-open, #detail-overlay.is-open');
+    if (overlay) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+});
+</script>
 
 
     
