@@ -2620,20 +2620,24 @@ font-size: 18px;
         document.getElementById('popup').classList.remove('is-open');
         formOverlay.classList.add('is-open');
         formPopup.classList.add('is-open');
+        document.body.style.overflow = 'hidden'; // НОВЫЙ ПАРАМЕТР===============================================================================
+        
     });
 
     // Закрыть форму
     function closeForm() {
         formOverlay.classList.remove('is-open');
         formPopup.classList.remove('is-open');
-    }
+        document.body.style.overflow = '';// НОВЫЙ ПАРАМЕТР===============================================================================
+        }
     formClose.addEventListener('click', closeForm);
 
     // Закрыть успех
     function closeSuccess() {
         formOverlay.classList.remove('is-open');
         successPopup.classList.remove('is-open');
-    }
+        document.body.style.overflow = '';// НОВЫЙ ПАРАМЕТР===============================================================================
+        }
     successClose.addEventListener('click', closeSuccess);
 
     // Отправка
@@ -2642,6 +2646,8 @@ font-size: 18px;
         // ЗДЕСЬ БУДЕТ AJAX-ОТПРАВКА НА ПОЧТУ (добавим позже)
         formPopup.classList.remove('is-open');
         successPopup.classList.add('is-open');
+        document.body.style.overflow = 'hidden';// НОВЫЙ ПАРАМЕТР===============================================================================
+        }
     });
 })();
 </script>
