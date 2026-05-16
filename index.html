@@ -3209,15 +3209,13 @@ document.addEventListener('DOMContentLoaded', function() {
         detailText.textContent = data.text;
         detailOverlay.classList.add('is-open');
         detailPopup.classList.add('is-open');
-          document.body.style.overflow = 'hidden'; // ← добавил============================================================================================
-      }
+         }
     });
   });
 
   function closeDetail() {
     detailOverlay.classList.remove('is-open');
     detailPopup.classList.remove('is-open');
-    document.body.style.overflow = ''; // ← добавил========================================================================================================================
     }
 
   detailClose.addEventListener('click', closeDetail);
