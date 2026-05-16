@@ -2620,15 +2620,12 @@ font-size: 18px;
         document.getElementById('popup').classList.remove('is-open');
         formOverlay.classList.add('is-open');
         formPopup.classList.add('is-open');
-        document.body.style.overflow = 'hidden'; // НОВЫЙ ПАРАМЕТР===============================================================================
-        
-    });
+        });
 
     // Закрыть форму
     function closeForm() {
         formOverlay.classList.remove('is-open');
         formPopup.classList.remove('is-open');
-        document.body.style.overflow = '';// НОВЫЙ ПАРАМЕТР===============================================================================
         }
     formClose.addEventListener('click', closeForm);
 
@@ -2636,7 +2633,6 @@ font-size: 18px;
     function closeSuccess() {
         formOverlay.classList.remove('is-open');
         successPopup.classList.remove('is-open');
-        document.body.style.overflow = '';// НОВЫЙ ПАРАМЕТР===============================================================================
         }
     successClose.addEventListener('click', closeSuccess);
 
@@ -2646,7 +2642,6 @@ font-size: 18px;
         // ЗДЕСЬ БУДЕТ AJAX-ОТПРАВКА НА ПОЧТУ (добавим позже)
         formPopup.classList.remove('is-open');
         successPopup.classList.add('is-open');
-        document.body.style.overflow = 'hidden';// НОВЫЙ ПАРАМЕТР===============================================================================
         }
     });
 })();
@@ -3409,17 +3404,27 @@ document.addEventListener('contextmenu', function(e) {
 
 <!-- ── ================================ЗАПРЕТ СКРОЛЛА ПРИ ЗАТЕМНЕНИИ=============================================== ── -->
 <script>
-document.addEventListener('click', function(e) {
-    // Проверяем все варианты открытых оверлеев
-    const overlay = document.querySelector('.popup-overlay.is-open, .form-overlay.is-open, #detail-overlay.is-open');
-    if (overlay) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
-});
-</script>
+(function() {
+    const blockedSelectors = [
+        '.popup-overlay.is-open',
+        '.form-overlay.is-open',
+        '#detail-overlay.is-open',
+        '#success-popup.is-open'
+    ];
 
+    function checkScroll() {
+        const isBlocked = blockedSelectors.some(sel => {
+            const el = document.querySelector(sel);
+            return el && el.offsetParent !== null;
+        });
+        document.body.style.overflow = isBlocked ? 'hidden' : '';
+    }
+
+    const observer = new MutationObserver(checkScroll);
+    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+    checkScroll();
+})();
+</script>
 
     
 </body>
