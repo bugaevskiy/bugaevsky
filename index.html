@@ -2369,23 +2369,20 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     function closePopup() {
         overlay.classList.remove('is-open');
         popup.classList.remove('is-open');
-        document.body.style.overflow = ''; //==========================================================НОВАЯ СТРОКА==============================
-    }
+        }
 
     document.querySelector('.hero__side-cta').addEventListener('click', function(e) {
         e.preventDefault();
         overlay.classList.add('is-open');
         popup.classList.add('is-open');
         goTo(0);
-        document.body.style.overflow = 'hidden'; //=========================================================НОВАЯ СТРОКА=======================
-    });
+        });
 document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('click', function(e) {
     e.preventDefault();
     overlay.classList.add('is-open');
     popup.classList.add('is-open');
     goTo(0);
-    document.body.style.overflow = 'hidden'; //==========================================================НОВАЯ СТРОКА===========================
-});
+    });
     closeBtn.addEventListener('click', closePopup);
     prevBtn.addEventListener('click', function() {
         if (current > 0) goTo(current - 1);
@@ -2396,7 +2393,6 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 
     document.getElementById('popup-cta').addEventListener('click', function() {
         closePopup();
-        document.body.style.overflow = 'hidden'; // =======================НОВАЯ СТРОКА================================================
         document.getElementById('form-overlay').classList.add('is-open');
         document.getElementById('form-popup').classList.add('is-open');
     });
@@ -2599,8 +2595,8 @@ font-size: 18px;
     const formOverlay = document.getElementById('form-overlay');
     const formPopup = document.getElementById('form-popup');
     const successPopup = document.getElementById('success-popup');
-    const successClose = document.getElementById('form-close');
-    const formClose = document.getElementById('success-close');
+    const formClose = document.getElementById('form-close');
+    const successClose = document.getElementById('success-close');
     const form = document.getElementById('form-fields');
 
     // Открыть форму по CTA из попапа
@@ -2609,36 +2605,27 @@ font-size: 18px;
         document.getElementById('popup').classList.remove('is-open');
         formOverlay.classList.add('is-open');
         formPopup.classList.add('is-open');
-        document.body.style.overflow = 'hidden';//==========================НОВАЯ СТРОКА=======================================================================================
-    });
+        });
 
     // Закрыть форму
     function closeForm() {
         formOverlay.classList.remove('is-open');
         formPopup.classList.remove('is-open');
-        document.body.style.overflow = ''; //==========================НОВАЯ СТРОКА=======================================================================================
         }
     formClose.addEventListener('click', closeForm);
-    formClose.addEventListener('touchstart', function(e) {//==========================НОВАЯ СТРОКА=======================================================================================
-    e.preventDefault();//==========================НОВАЯ СТРОКА=======================================================================================
-    closeForm();//==========================НОВАЯ СТРОКА=======================================================================================
-        });
-    formOverlay.addEventListener('click', closeForm);//==========================НОВАЯ СТРОКА=======================================================================================
-
-
+    
     // Закрыть успех
     function closeSuccess() {
         formOverlay.classList.remove('is-open');
-         if (successPopup) successPopup.classList.remove('is-open');//================================СТАЫЙ КОД================successPopup.classList.remove('is-open');
-        document.body.style.overflow = '';//==========================НОВАЯ СТРОКА=======================================================================================
+        successPopup.classList.remove('is-open');
         }
-         if (successClose) successClose.addEventListener('click', closeSuccess);//=================СТАЫЙ КОД========================successClose.addEventListener('click', closeSuccess);
+        successClose.addEventListener('click', closeSuccess);
 
     // Отправка
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         formPopup.classList.remove('is-open');
-        if (successPopup) successPopup.classList.add('is-open');//===СТАРАЯ СТРОКА===========================successPopup.classList.add('is-open');
+        successPopup.classList.add('is-open');
         }
     });
 })();
@@ -3403,6 +3390,42 @@ document.addEventListener('contextmenu', function(e) {
     });
 })();
 </script>
-   
+
+
+<!-- ===========================БЛОК СКРОЛЛА========================================= -->
+<script>
+(function() {
+    const allOverlays = [
+        'popup-overlay',
+        'form-overlay',
+        'detail-overlay',
+        'resume-overlay',
+        'privacy-overlay'
+    ];
+    
+    function updateScroll() {
+        const anyOpen = allOverlays.some(function(id) {
+            const el = document.getElementById(id);
+            return el && el.classList.contains('is-open');
+        });
+        document.body.style.overflow = anyOpen ? 'hidden' : '';
+    }
+    
+    // Следим за изменениями классов
+    const observer = new MutationObserver(updateScroll);
+    
+    allOverlays.forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+        }
+    });
+    
+    updateScroll();
+})();
+</script>
+
+
+    
 </body>
 </html>
