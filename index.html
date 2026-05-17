@@ -589,13 +589,15 @@ margin-left: -24px;
 .hero__mobile-cta {
     display: none;
 }
-        .hero__side-cta-arrow {
-            font-size: 20px;/*--=========================НОВАЯ СТРОКА======================--*/
-            font-weight: 700; /*--=========================НОВАЯ СТРОКА======================--*/
-            position: relative;/*--=========================НОВАЯ СТРОКА======================--*/
-            top: 0px; /*--=========================НОВАЯ СТРОКА======================--*/
-       }
-
+       
+     
+.hero__side-cta-arrow, /*--=========================НОВАЯ СТРОКА======================--*/
+.popup__cta-arrow, /*--=========================НОВАЯ СТРОКА======================--*/
+.form-popup__submit span { /*--=========================НОВАЯ СТРОКА======================--*/
+    font-size: 20px; /*--=========================НОВАЯ СТРОКА======================--*/
+    font-weight: 700; /*--=========================НОВАЯ СТРОКА======================--*/
+}
+        
 .hero__audience-wrap {
     display: flex;
     align-items: flex-start;
@@ -1436,9 +1438,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 
                                                                 
                 <div class="hero__side-divider"></div>
-                <a href="#" class="hero__side-cta">
-                    Получить диагностику
-                    <span class="hero__side-cta-arrow">→</span>
+                <a href="#" class="hero__side-cta">Получить диагностику <span class="hero__side-cta-arrow">&#10132;</span>
                 </a>
              <div style="display:flex;align-items:flex-start;gap:8px;margin-top:16px;text-align:left;margin-left:20px;">     
              <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="hero__audience-icon">
@@ -1487,7 +1487,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
     </svg>
 </span>
               </p>
-        <a href="#" class="hero__side-cta" id="cta-mobile">Получить диагностику →</a>
+        <a href="#" class="hero__side-cta" id="cta-mobile">Получить диагностику <span class="hero__side-cta-arrow">&#10132;</span></a>
     <div class="hero__audience-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="#D4A43C" stroke-width="1.2"><path d="M12 2 L20 6 L20 14 C20 17 16 21 12 22 C8 21 4 17 4 14 L4 6 Z"/></svg>
         <span>Работаем с собственниками<br>и топ-менеджментом</span>
@@ -1564,7 +1564,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
      </div>
 </section>
  <div class="cases__cta-wrap">
-    <a href="#" class="hero__side-cta">Получить диагностику →</a>
+    <a href="#" class="hero__side-cta">Получить диагностику <span class="hero__side-cta-arrow">&#10132;</span></a>
 </div>
 <div class="section-divider"></div>
 
@@ -1983,7 +1983,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     <div class="popup__footer">
     <button class="popup__cta" id="popup-cta">
             Оставьте ваши данные
-            <span class="popup__cta-arrow">&rarr;</span>
+           <span class="popup__cta-arrow">&#10132;</span>
         </button>
           <div class="popup__footer-left">
             <div class="popup__shield">
@@ -2281,11 +2281,12 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     background-color: #3A3A3A;
     transform: translateY(-1px);
 }
-.popup__cta-arrow {
-    font-size: 20px;/*--=========================НОВАЯ СТРОКА======================--*/
-    font-weight: 700;/*--=========================НОВАЯ СТРОКА======================--*/
-    position: relative; /*--=========================НОВАЯ СТРОКА======================--*/
-    top: 0px;/*--=========================НОВАЯ СТРОКА======================--*/
+    
+.hero__side-cta-arrow, /*--=========================НОВАЯ СТРОКА======================--*/
+.popup__cta-arrow, /*--=========================НОВАЯ СТРОКА======================--*/
+.form-popup__submit span { /*--=========================НОВАЯ СТРОКА======================--*/
+    font-size: 20px; /*--=========================НОВАЯ СТРОКА======================--*/
+    font-weight: 700; /*--=========================НОВАЯ СТРОКА======================--*/
 }
 
 @media (max-width: 1080px) {
@@ -2434,7 +2435,7 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
        
         <button type="submit" class="form-popup__submit">
             Отправить
-            <span>&rarr;</span>
+            <span>&#10132;</span>
         </button>
     </form>
     <p class="form-popup__note">Спасибо за уделённое время!</p>
@@ -2591,12 +2592,13 @@ font-size: 18px;
     margin-top: 16px;
     line-height: 1.5;
 }
-    .form-popup__submit span { /*--==================НОВАЯ СТРОКА===============--*/
-    font-size: 20px;/*--==================НОВАЯ СТРОКА===============--*/
-    font-weight: 700; /*--==================НОВАЯ СТРОКА===============--*/ 
-    position: relative; /*--=========================НОВАЯ СТРОКА======================--*/
-    top: 0px;/*--=========================НОВАЯ СТРОКА======================--*/
+.hero__side-cta-arrow, /*--=========================НОВАЯ СТРОКА======================--*/
+.popup__cta-arrow, /*--=========================НОВАЯ СТРОКА======================--*/
+.form-popup__submit span { /*--=========================НОВАЯ СТРОКА======================--*/
+    font-size: 20px; /*--=========================НОВАЯ СТРОКА======================--*/
+    font-weight: 700; /*--=========================НОВАЯ СТРОКА======================--*/
 }
+    
 </style>
 
 <script>
