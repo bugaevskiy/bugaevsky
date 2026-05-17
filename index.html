@@ -2396,6 +2396,7 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
 
     document.getElementById('popup-cta').addEventListener('click', function() {
         closePopup();
+        document.body.style.overflow = 'hidden'; // =======================НОВАЯ СТРОКА================================================
         document.getElementById('form-overlay').classList.add('is-open');
         document.getElementById('form-popup').classList.add('is-open');
     });
