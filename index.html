@@ -2598,8 +2598,8 @@ font-size: 18px;
     const formOverlay = document.getElementById('form-overlay');
     const formPopup = document.getElementById('form-popup');
     const successPopup = document.getElementById('success-popup');
-    const formClose = document.getElementById('form-close');
-    const successClose = document.getElementById('success-close');
+    const formClose = document.getElementById('success-close');
+    const successClose = document.getElementById('form-close');
     const form = document.getElementById('form-fields');
 
     // Открыть форму по CTA из попапа
@@ -2622,17 +2622,16 @@ font-size: 18px;
     // Закрыть успех
     function closeSuccess() {
         formOverlay.classList.remove('is-open');
-        successPopup.classList.remove('is-open');
+         if (successPopup) successPopup.classList.remove('is-open');//================================СТАЫЙ КОД================successPopup.classList.remove('is-open');
         document.body.style.overflow = '';//==========================НОВАЯ СТРОКА=======================================================================================
         }
-    successClose.addEventListener('click', closeSuccess);
+         if (successClose) successClose.addEventListener('click', closeSuccess);//=================СТАЫЙ КОД========================successClose.addEventListener('click', closeSuccess);
 
     // Отправка
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        // ЗДЕСЬ БУДЕТ AJAX-ОТПРАВКА НА ПОЧТУ (добавим позже)
         formPopup.classList.remove('is-open');
-        successPopup.classList.add('is-open');
+        if (successPopup) successPopup.classList.add('is-open');//===СТАРАЯ СТРОКА===========================successPopup.classList.add('is-open');
         }
     });
 })();
