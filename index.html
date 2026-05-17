@@ -591,8 +591,8 @@ margin-left: -24px;
 }
         .hero__side-cta-arrow {
             font-size: 20px;
-            font-weight: 700;
-            line-height: 1; /*--=========================НОВАЯ СТРОКА======================--*/
+            vertical-align: middle;/*--=========================НОВАЯ СТРОКА======================--*/
+            margin-top: -2px; /*--=========================НОВАЯ СТРОКА======================--*/
        }
 
 .hero__audience-wrap {
@@ -2283,7 +2283,8 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
 .popup__cta-arrow {
     font-size: 20px;
     font-weight: 700;
-    line-height: 1; /*--=========================НОВАЯ СТРОКА======================--*/
+    vertical-align: middle; /*--=========================НОВАЯ СТРОКА======================--*/
+    margin-top: -2px;/*--=========================НОВАЯ СТРОКА======================--*/
 }
 
 @media (max-width: 1080px) {
@@ -2555,7 +2556,7 @@ font-size: 18px;
     border: 1.5px solid #D4A43C;
     cursor: pointer;
     margin-top: 6px;
-    transition: background-color 0.2s, transform 0.15s;
+    transition: background-color 0.2s, transform 0.15s;    
 }
 .form-popup__submit:hover {
     background-color: #3A3A3A;
@@ -2588,6 +2589,10 @@ font-size: 18px;
     text-align: center;
     margin-top: 16px;
     line-height: 1.5;
+}
+    .form-popup__submit span { /*--==================НОВАЯ СТРОКА===============--*/
+    vertical-align: middle;/*--==================НОВАЯ СТРОКА===============--*/
+    margin-top: -2px;/*--==================НОВАЯ СТРОКА===============--*/
 }
 </style>
 
