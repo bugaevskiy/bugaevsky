@@ -2073,7 +2073,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
 }
 .popup__skip {
     margin-top: 8px;
-    font-size: 15px;
+    font-size: 16px;
 }
 .popup__skip a {
     color: #D4A43C;
@@ -3241,7 +3241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     <!-- Левая колонка -->
   <div style="flex:0 0 40%; padding:36px 28px 28px; display:flex; flex-direction:column; align-items:center;">
-    <h2 class="form-popup__title">Профессиональная биография</h2>
+   <h2 class="form-popup__title" style=color:#D4A43C;">Профессиональная биография</h2>
     <div class="form-popup__divider"></div>
     
     <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:24px;">
@@ -3400,16 +3400,66 @@ document.addEventListener('contextmenu', function(e) {
 
 <!-- ── ================================ЗАПРЕТ СКРОЛЛА ПРИ ЗАТЕМНЕНИИ=============================================== ── -->
 <script>
-document.addEventListener('click', function(e) {
-    // Проверяем все варианты открытых оверлеев
-    const overlay = document.querySelector('.popup-overlay.is-open, .form-overlay.is-open, #detail-overlay.is-open');
-    if (overlay) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
+(function() {
+    // Функция для блокировки скролла
+    function lockScroll() {
+        document.body.classList.add('no-scroll');
     }
-});
+    
+    // Функция для разблокировки скролла
+    function unlockScroll() {
+        document.body.classList.remove('no-scroll');
+    }
+    
+    // Функция закрытия попапа
+    function closeFormPopup() {
+        document.getElementById('form-popup').classList.remove('is-open');
+        document.getElementById('form-overlay').classList.remove('is-open');
+        unlockScroll();
+    }
+    
+    // Функция открытия попапа
+    function openFormPopup() {
+        document.getElementById('form-popup').classList.add('is-open');
+        document.getElementById('form-overlay').classList.add('is-open');
+        lockScroll();
+    }
+    
+    // Закрытие по кнопке-крестику
+    document.getElementById('form-close').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeFormPopup();
+    });
+    
+    // Закрытие по клику на оверлей (затемнение)
+    document.getElementById('form-overlay').addEventListener('click', function(e) {
+        e.preventDefault();
+        closeFormPopup();
+    });
+    
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const popup = document.getElementById('form-popup');
+            if (popup.classList.contains('is-open')) {
+                closeFormPopup();
+            }
+        }
+    });
+    
+    // Открытие попапа по кнопкам (подставьте свои селекторы)
+    document.querySelectorAll('[data-form-open]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openFormPopup();
+        });
+    });
+    
+})();
 </script>
+
+
     
 </body>
 </html>
