@@ -2600,13 +2600,17 @@ font-size: 18px;
     const form = document.getElementById('form-fields');
 
     // Открыть форму по CTA из попапа
-    document.getElementById('popup-cta').addEventListener('click', function() {
+    //===СТАРЫЙ КОД===========document.getElementById('popup-cta').addEventListener('click', function() {
+    
+    const popupCta = document.getElementById('popup-cta');             //==================НОВЫЙ КОД===========
+    if (popupCta) {                                                    //==================НОВЫЙ КОД===========
+        popupCta.addEventListener('click', function() {                     //==================НОВЫЙ КОД===========
         document.getElementById('popup-overlay').classList.remove('is-open');
         document.getElementById('popup').classList.remove('is-open');
         formOverlay.classList.add('is-open');
         formPopup.classList.add('is-open');
         });
-
+    }
     // Закрыть форму
     function closeForm() {
         formOverlay.classList.remove('is-open');
@@ -2626,7 +2630,6 @@ font-size: 18px;
         e.preventDefault();
         formPopup.classList.remove('is-open');
         successPopup.classList.add('is-open');
-        }
     });
 })();
 </script>
