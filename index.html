@@ -2599,8 +2599,8 @@ font-size: 18px;
     const formOverlay = document.getElementById('form-overlay');
     const formPopup = document.getElementById('form-popup');
     const successPopup = document.getElementById('success-popup');
-    const formClose = document.getElementById('success-close');
     const successClose = document.getElementById('form-close');
+    const formClose = document.getElementById('success-close');
     const form = document.getElementById('form-fields');
 
     // Открыть форму по CTA из попапа
@@ -2619,6 +2619,10 @@ font-size: 18px;
         document.body.style.overflow = ''; //==========================НОВАЯ СТРОКА=======================================================================================
         }
     formClose.addEventListener('click', closeForm);
+    formClose.addEventListener('touchstart', function(e) {//==========================НОВАЯ СТРОКА=======================================================================================
+    e.preventDefault();//==========================НОВАЯ СТРОКА=======================================================================================
+    closeForm();//==========================НОВАЯ СТРОКА=======================================================================================
+});
 
     // Закрыть успех
     function closeSuccess() {
