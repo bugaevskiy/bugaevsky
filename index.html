@@ -1269,14 +1269,7 @@ text-shadow: 0 0 0.5px #1F1F1F;
 [data-theme="dark"] .popup-overlay {
     background: rgba(0, 0, 0, 0.85);
 }
-
-/*-----------------------------------ЗАПРЕТ СКРОЛА КРАНА ПРИ ОТКРЫТОМ ПОПАП------------------------------------------------------------------*/    
-body.no-scroll {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-} 
-        
+       
     </style>
 </head>
 <body>
@@ -2376,6 +2369,7 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
     function closePopup() {
         overlay.classList.remove('is-open');
         popup.classList.remove('is-open');
+        document.body.style.overflow = ''; //==========================================================НОВАЯ СТРОКА==============================
     }
 
     document.querySelector('.hero__side-cta').addEventListener('click', function(e) {
@@ -2383,12 +2377,14 @@ font-family: Calibri, 'Segoe UI', Roboto, sans-serif;
         overlay.classList.add('is-open');
         popup.classList.add('is-open');
         goTo(0);
+        document.body.style.overflow = 'hidden'; //=========================================================НОВАЯ СТРОКА=======================
     });
 document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('click', function(e) {
     e.preventDefault();
     overlay.classList.add('is-open');
     popup.classList.add('is-open');
     goTo(0);
+    document.body.style.overflow = 'hidden'; //==========================================================НОВАЯ СТРОКА===========================
 });
     closeBtn.addEventListener('click', closePopup);
     prevBtn.addEventListener('click', function() {
@@ -2408,10 +2404,6 @@ document.querySelector('.cases__cta-wrap .hero__side-cta').addEventListener('cli
     window.getQuestions = function() { return questions; };
     window.goToDiagnostic = function(n) { goTo(n); }; 
 })();
-
-
-
-
 </script>
 
 
@@ -2616,12 +2608,14 @@ font-size: 18px;
         document.getElementById('popup').classList.remove('is-open');
         formOverlay.classList.add('is-open');
         formPopup.classList.add('is-open');
+        document.body.style.overflow = 'hidden';//==========================НОВАЯ СТРОКА=======================================================================================
     });
 
     // Закрыть форму
     function closeForm() {
         formOverlay.classList.remove('is-open');
         formPopup.classList.remove('is-open');
+        document.body.style.overflow = ''; //==========================НОВАЯ СТРОКА=======================================================================================
         }
     formClose.addEventListener('click', closeForm);
 
@@ -2629,6 +2623,7 @@ font-size: 18px;
     function closeSuccess() {
         formOverlay.classList.remove('is-open');
         successPopup.classList.remove('is-open');
+        document.body.style.overflow = '';//==========================НОВАЯ СТРОКА=======================================================================================
         }
     successClose.addEventListener('click', closeSuccess);
 
@@ -2960,17 +2955,20 @@ document.querySelectorAll('.article-card__toggle').forEach(btn => {
 document.getElementById('privacy-close').addEventListener('click', function() {
     document.getElementById('privacy-overlay').classList.remove('is-open');
     document.getElementById('privacy-popup').classList.remove('is-open');
+    document.body.style.overflow = '';//=================================НОВАЯ СТРОКА============================================================================
 });
 document.getElementById('privacy-overlay').addEventListener('click', function() {
     document.getElementById('privacy-overlay').classList.remove('is-open');
     document.getElementById('privacy-popup').classList.remove('is-open');
     document.getElementById('form-overlay').classList.add('is-open');
+    document.body.style.overflow = 'hidden'; //==================================НОВАЯ СТРОКА=====================================================================
 });
 document.querySelector('.form-popup__agree-link').addEventListener('click', function(e) {
     e.preventDefault();
     document.getElementById('form-overlay').classList.remove('is-open');
     document.getElementById('privacy-overlay').classList.add('is-open');
     document.getElementById('privacy-popup').classList.add('is-open');
+    document.body.style.overflow = 'hidden'; //====================================НОВАЯ СТРОКА==========================================================================
 });
 </script>
 
@@ -3316,11 +3314,13 @@ document.addEventListener('DOMContentLoaded', function() {
   function openResume() {
     if (resumeOverlay) resumeOverlay.classList.add('is-open');
     if (resumePopup) resumePopup.classList.add('is-open');
+    document.body.style.overflow = 'hidden'; //=============================================НОВАЯ СТРОКА============================================================
   }
 
   function closeResume() {
     if (resumeOverlay) resumeOverlay.classList.remove('is-open');
     if (resumePopup) resumePopup.classList.remove('is-open');
+    document.body.style.overflow = '';//=============================================НОВАЯ СТРОКА============================================================
   }
 
   if (resumeIcon) resumeIcon.addEventListener('click', openResume);
@@ -3339,6 +3339,7 @@ document.addEventListener('DOMContentLoaded', function() {
       closeResume();
       document.getElementById('popup-overlay').classList.add('is-open');
       document.getElementById('popup').classList.add('is-open');
+      document.body.style.overflow = 'hidden';//=============================================НОВАЯ СТРОКА============================================================
       if (window.goToDiagnostic) window.goToDiagnostic(0);
     });
   }
@@ -3396,61 +3397,6 @@ document.addEventListener('contextmenu', function(e) {
     });
 })();
 </script>
-
-
-<!-- ── ================================ЗАПРЕТ СКРОЛЛА ПРИ ЗАТЕМНЕНИИ=============================================== ── -->
-<script>
-(function() {
-    const formPopup = document.getElementById('form-popup');
-    const formOverlay = document.getElementById('form-overlay');
-    const formClose = document.getElementById('form-close');
-
-    // Функция закрытия
-    function closeFormPopup() {
-        formPopup.classList.remove('is-open');
-        formOverlay.classList.remove('is-open');
-        document.body.style.overflow = ''; // ← разблокировка скролла
-    }
-
-    // Функция открытия
-    function openFormPopup() {
-        formPopup.classList.add('is-open');
-        formOverlay.classList.add('is-open');
-        document.body.style.overflow = 'hidden'; // ← блокировка скролла
-    }
-
-    // Закрытие по крестику
-    formClose.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeFormPopup();
-    });
-
-    // Закрытие по оверлею (затемнению)
-    formOverlay.addEventListener('click', function(e) {
-        e.preventDefault();
-        closeFormPopup();
-    });
-
-    // Закрытие по Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && formPopup.classList.contains('is-open')) {
-            closeFormPopup();
-        }
-    });
-
-    // Открытие по кнопкам с атрибутом data-form-open
-    document.querySelectorAll('[data-form-open]').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            openFormPopup();
-        });
-    });
-
-})();
-</script>
-
-
-    
+   
 </body>
 </html>
