@@ -3230,7 +3230,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="resume-overlay" class="form-overlay" style="z-index:4000;"></div>
 
 <!-- РАЗМЕР ОСНОВНОГО ОКНА max-width:1150px-------->    
-<div id="resume-popup" class="form-popup" style="z-index:4001; max-width:1149px; width:90vw; padding:0; border-radius:16px;"> 
+<div id="resume-popup" class="form-popup" style="z-index:4001; max-width:1149px; width:90vw; padding:0; border-radius:16px;     display:flex; overflow:hidden; position:relative;"> 
     
 <!--------====================------------------------------------НОВЫЙ ПАРАМЕТР------------------------------------------------------------------------->
 <button class="form-popup__close" id="resume-close" style="position:fixed; top:8px; right:8px; font-size: 30px; width: 30px; height: 30px; line-height: 30px; z-index:9999;">&times; </button>   
@@ -3300,28 +3300,29 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Правая колонка: фото -->
 <div style="
     flex:0 0 60%; 
+    min-width:0;
+    min-height:0;
     background:#f8f8f8; 
     display:flex; 
-    align-items:stretch; 
-    justify-content:center; 
     border-radius:0 16px 16px 0; 
     overflow:hidden;
     position:relative; 
-    z-index:1;
-    ">
+">
 
   <img src="./Image.png"
        alt="Дмитрий Бугаевский"
        draggable="false"
        oncontextmenu="return false;"
        style="
-              width:100.5%; 
-              height:100.5%; 
+              width:100%; 
+              height:100%; 
               object-fit:cover; 
-              object-position:center right; 
-              user-select:none; 
+              object-position:right center; 
               display:block;
-              transform:translateZ(0);
+              user-select:none;
+              flex-shrink:0;
+              min-width:100%;
+              min-height:100%;
               -webkit-user-drag:none; 
       ">
 </div>
