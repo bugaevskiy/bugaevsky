@@ -1,9 +1,9 @@
-# name: Traffic Analytics
+name: Traffic Analytics
 
-# on:
-#   schedule:
-#     - cron: '0 6 * * *'  # Каждый день в 6:00 UTC (9:00 МСК)
-#   workflow_dispatch:      # Можно запустить вручную
+on:
+schedule:
+- cron: '0 6 * * *'  # Каждый день в 6:00 UTC (9:00 МСК)
+workflow_dispatch:      # Можно запустить вручную
 
 jobs:
   fetch-traffic:
